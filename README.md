@@ -1,36 +1,169 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Blockchain-Based Work Verification System
 
-## Getting Started
+A decentralized system for verifying freelance and internship work using **IPFS**, **Solidity smart contracts**, and **Polygon Amoy testnet**.
 
-First, run the development server:
+> Built for academic PBL project — Manipal University Jaipur, Dept. of Computer Science & Engineering.
+
+---
+
+## 🏗 Architecture
+
+```
+┌─────────────┐     ┌──────────┐     ┌──────────────────┐
+│   Frontend   │────▶│  Pinata  │────▶│   IPFS Network   │
+│  (Next.js)   │     │   API    │     │  (file storage)  │
+│              │     └──────────┘     └──────────────────┘
+│              │
+│              │     ┌──────────────────────────────────┐
+│              │────▶│  Smart Contract (Polygon Amoy)   │
+│              │     │  WorkVerification.sol             │
+└─────────────┘     └──────────────────────────────────┘
+```
+
+| Layer | Tech |
+|-------|------|
+| Frontend | Next.js 16, TypeScript, CSS |
+| Wallet | MetaMask + ethers.js v6 |
+| Smart Contract | Solidity 0.8.20, Hardhat |
+| File Storage | IPFS via Pinata API |
+| Blockchain | Polygon Amoy Testnet |
+
+---
+
+## 📁 Project Structure
+
+```
+/contracts
+  Verification.sol          # Solidity smart contract
+
+/scripts
+  deploy.ts                 # Hardhat deployment script
+
+/src
+  app/
+    page.tsx                # Main page (Student/Mentor tabs)
+    verify/page.tsx         # Recruiter verification page
+    api/upload/route.ts     # IPFS upload API (server-side)
+    layout.tsx              # Root layout with WalletProvider
+  components/
+    Header.tsx              # Navigation + wallet button
+    WalletButton.tsx        # MetaMask connect/disconnect
+    VerificationForm.tsx    # Student submission form
+    SubmissionCard.tsx      # Submission display card
+    MentorPanel.tsx         # Mentor approval panel
+  context/
+    WalletContext.tsx        # Wallet state management
+  lib/
+    contract.ts             # Smart contract ABI + helpers
+    pinata.ts               # IPFS upload client helper
+
+hardhat.config.ts
+.env.example
+```
+
+---
+
+## 🚀 Setup
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Configure environment variables
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` with your values:
+
+| Variable | Where to get it |
+|----------|----------------|
+| `PINATA_API_KEY` | [pinata.cloud](https://pinata.cloud) → API Keys |
+| `PINATA_SECRET_KEY` | Same as above |
+| `PRIVATE_KEY` | MetaMask → Account Details → Export Private Key |
+| `NEXT_PUBLIC_CONTRACT_ADDRESS` | Set after deploying contract (step 3) |
+| `NEXT_PUBLIC_AMOY_RPC` | Default: `https://rpc-amoy.polygon.technology` |
+
+### 3. Deploy smart contract
+
+Get testnet MATIC from [Polygon Faucet](https://faucet.polygon.technology/), then:
+
+```bash
+npx hardhat compile
+npx hardhat run scripts/deploy.ts --network amoy
+```
+
+Copy the printed contract address into `.env` as `NEXT_PUBLIC_CONTRACT_ADDRESS`.
+
+### 4. Run the app
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 👤 User Flows
 
-## Learn More
+### Student
+1. Connect MetaMask wallet
+2. Switch to "Student" tab
+3. Enter project title + select proof file
+4. Click "Submit to Blockchain"
+5. File uploads to IPFS → CID submitted to smart contract → real tx hash displayed
 
-To learn more about Next.js, take a look at the following resources:
+### Mentor
+1. Connect MetaMask wallet (different account)
+2. Switch to "Mentor" tab
+3. Click "Load Submissions from Blockchain"
+4. Click "Approve" on any pending submission
+5. Approval recorded on-chain
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Recruiter
+1. Navigate to `/verify`
+2. Enter submission ID (0, 1, 2, ...)
+3. View student address, IPFS CID, approval status, timestamps
+4. Click through to IPFS file or Polygonscan
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📊 Completion Status
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Feature | Status |
+|---------|--------|
+| Smart contract (Solidity) | ✅ Complete |
+| Hardhat deployment config | ✅ Complete |
+| MetaMask wallet integration | ✅ Complete |
+| IPFS upload (Pinata) | ✅ Complete |
+| Student submission flow | ✅ Complete |
+| Mentor approval flow | ✅ Complete |
+| Recruiter verification page | ✅ Complete |
+| Polygonscan tx links | ✅ Complete |
+| Contract verified on Polygonscan | ⬜ Pending |
+| Advanced error handling / toasts | ⬜ Pending |
+| Mobile responsive polish | ⬜ Pending |
+| Production security hardening | ⬜ Not in scope |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Current completion: ~85%**
+
+---
+
+## 🔮 Future Work
+
+- Verify contract source on Polygonscan
+- Add toast notifications for better UX
+- Mobile-responsive design polish
+- Event-based submission list (listen for `WorkSubmitted` events)
+- Mentor authorization (restrict who can approve)
+- Batch verification for recruiters
+
+---
+
+## 📜 License
+
+Academic project — MIT License.
