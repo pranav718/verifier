@@ -3,8 +3,8 @@ import { WalletProvider } from '../context/WalletContext';
 import '../styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'Work Verifier — Blockchain Verification System',
-  description: 'Blockchain-based freelance & internship work verification using IPFS and Polygon',
+  title: 'verifier',
+  description: 'Decentralized work verification using IPFS, Solidity smart contracts, and Polygon Amoy testnet. Submit, approve, and verify credentials on-chain.',
 };
 
 export default function RootLayout({
@@ -14,6 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="theme-color" content="#000000" />
+      </head>
       <body>
         <WalletProvider>
           <div className="page-shell">{children}</div>

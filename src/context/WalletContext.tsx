@@ -22,7 +22,6 @@ const WalletContext = createContext<WalletState>({
 
 export const useWallet = () => useContext(WalletContext);
 
-// Polygon Amoy chain config
 const AMOY_CHAIN_ID = 80002;
 const AMOY_CHAIN_CONFIG = {
     chainId: '0x' + AMOY_CHAIN_ID.toString(16),
@@ -38,7 +37,6 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     const [isConnecting, setIsConnecting] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Auto-reconnect on page load if previously connected
     useEffect(() => {
         if (typeof window === 'undefined' || !window.ethereum) return;
 
@@ -54,7 +52,6 @@ export function WalletProvider({ children }: { children: ReactNode }) {
             .then((id: string) => setChainId(parseInt(id, 16)))
             .catch(() => { });
 
-        // Listen for account/network changes
         const handleAccountsChanged = (accounts: string[]) => {
             setAccount(accounts.length > 0 ? accounts[0] : null);
         };
@@ -81,20 +78,17 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         setError(null);
 
         try {
-            // Request accounts
             const accounts: string[] = await window.ethereum.request({
                 method: 'eth_requestAccounts',
             });
             setAccount(accounts[0]);
 
-            // Try to switch to Amoy
             try {
                 await window.ethereum.request({
                     method: 'wallet_switchEthereumChain',
                     params: [{ chainId: AMOY_CHAIN_CONFIG.chainId }],
                 });
             } catch (switchErr: unknown) {
-                // If chain not added, add it
                 if (switchErr && typeof switchErr === 'object' && 'code' in switchErr && (switchErr as { code: number }).code === 4902) {
                     await window.ethereum.request({
                         method: 'wallet_addEthereumChain',

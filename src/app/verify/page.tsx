@@ -34,13 +34,26 @@ export default function VerifyPage() {
 
     return (
         <main className="container">
+            <div className="grid-bg" />
             <Header />
 
             <section className="hero-card">
-                <h1>🔍 Verify Submission</h1>
-                <p className="muted">
-                    Recruiters: enter a submission ID to verify work credentials directly from the blockchain.
+                <h1>Verify Submission</h1>
+                <p className="hero-subtitle">
+                    Recruiters: enter a submission ID to verify work credentials
+                    directly from the blockchain no intermediaries needed.
                 </p>
+
+                <div className="hero-badges">
+                    <span className="hero-badge">
+                        <span className="badge-dot" />
+                        On-Chain Verification
+                    </span>
+                    <span className="hero-badge">
+                        <span className="badge-dot" />
+                        Tamper-Proof
+                    </span>
+                </div>
             </section>
 
             <section className="form-section">
@@ -94,7 +107,7 @@ export default function VerifyPage() {
                             <div className="verify-row">
                                 <span className="verify-label">Approval Status</span>
                                 <span className={result.approved ? 'badge-approved' : 'badge-pending'}>
-                                    {result.approved ? '✅ Approved' : '🟡 Pending'}
+                                    {result.approved ? 'Approved' : 'Pending'}
                                 </span>
                             </div>
 
@@ -125,7 +138,7 @@ export default function VerifyPage() {
                                 rel="noopener noreferrer"
                                 className="btn ghost small"
                             >
-                                📄 View on IPFS
+                                View on IPFS
                             </a>
                         </div>
                     </div>

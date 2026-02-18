@@ -19,7 +19,6 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'No file provided' }, { status: 400 });
         }
 
-        // Forward the file to Pinata's pinFileToIPFS endpoint
         const pinataForm = new FormData();
         pinataForm.append('file', file);
 
