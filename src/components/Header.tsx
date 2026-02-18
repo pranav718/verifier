@@ -6,14 +6,9 @@ import WalletButton from './WalletButton';
 export default function Header() {
   return (
     <header className="header">
-      <div className="logo">
-        <img src="/logo-placeholder.png" alt="Logo" width={48} height={48} />
-      </div>
-
-      <div className="title-block">
-        <div className="univ">Manipal University Jaipur</div>
-        <div className="dept">Dept. of Computer Science &amp; Engineering</div>
-      </div>
+      <Link href="/" className="brand">
+        <span className="brand-name">verifier</span>
+      </Link>
 
       <nav className="header-nav">
         <Link href="/" className="nav-link">Home</Link>

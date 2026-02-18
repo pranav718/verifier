@@ -5,10 +5,10 @@ import { Submission } from './VerificationForm';
 
 export default function SubmissionCard({ submission }: { submission: Submission }) {
   const statusLabel = {
-    uploading: '⏳ Uploading to IPFS...',
-    submitting: '⏳ Writing to blockchain...',
-    pending: '🟡 Pending Approval',
-    approved: '✅ Approved',
+    uploading: 'Uploading to IPFS...',
+    submitting: 'Writing to blockchain...',
+    pending: 'Pending Approval',
+    approved: 'Approved',
   }[submission.status];
 
   const statusClass = {

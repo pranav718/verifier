@@ -45,7 +45,6 @@ export default function MentorPanel() {
         try {
             const txHash = await approveWork(id);
             setSuccessMsg(`Approved! Tx: ${txHash.slice(0, 16)}...`);
-            // Refresh
             await fetchSubmissions();
         } catch (err: unknown) {
             setError(err instanceof Error ? err.message : 'Approval failed');
@@ -57,7 +56,7 @@ export default function MentorPanel() {
     return (
         <section className="form-section">
             <div className="form-card">
-                <h2>Mentor: Approve Submissions</h2>
+                <h2>Approve Submissions</h2>
 
                 {!account && (
                     <div className="alert warning">
@@ -73,8 +72,8 @@ export default function MentorPanel() {
                     {loadingList ? 'Loading...' : 'Load Submissions from Blockchain'}
                 </button>
 
-                {error && <div className="alert error" style={{ marginTop: 12 }}>{error}</div>}
-                {successMsg && <div className="alert success" style={{ marginTop: 12 }}>{successMsg}</div>}
+                {error && <div className="alert error" style={{ marginTop: 14 }}>{error}</div>}
+                {successMsg && <div className="alert success" style={{ marginTop: 14 }}>{successMsg}</div>}
             </div>
 
             <div className="submissions-list">
@@ -93,7 +92,7 @@ export default function MentorPanel() {
                                     Student: <span className="mono">{sub.student.slice(0, 6)}...{sub.student.slice(-4)}</span>
                                 </div>
                                 <div className={`card-status ${sub.approved ? 'status-approved' : 'status-pending'}`}>
-                                    {sub.approved ? '✅ Approved' : '🟡 Pending'}
+                                    {sub.approved ? 'Approved' : 'Pending'}
                                 </div>
                             </div>
 

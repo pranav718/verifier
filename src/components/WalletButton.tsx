@@ -32,7 +32,7 @@ export default function WalletButton() {
                 onClick={connect}
                 disabled={isConnecting}
             >
-                {isConnecting ? 'Connecting...' : '🦊 Connect Wallet'}
+                {isConnecting ? 'Connecting...' : 'Connect Wallet'}
             </button>
         </div>
     );

@@ -37,7 +37,6 @@ export default function VerificationForm() {
     setError(null);
     setLoading(true);
 
-    // Create a placeholder submission
     const tempId = Date.now();
     const tempSubmission: Submission = {
       id: tempId,
@@ -49,13 +48,11 @@ export default function VerificationForm() {
     setSubmissions(prev => [tempSubmission, ...prev]);
 
     try {
-      // Step 1: Upload to IPFS
       const cid = await uploadToIPFS(file);
       setSubmissions(prev =>
         prev.map(s => s.id === tempId ? { ...s, cid, status: 'submitting' as const } : s)
       );
 
-      // Step 2: Submit to smart contract
       const txHash = await submitToChain(title, cid);
       setSubmissions(prev =>
         prev.map(s => s.id === tempId ? { ...s, txHash, status: 'pending' as const } : s)
@@ -63,13 +60,11 @@ export default function VerificationForm() {
 
       setTitle('');
       setFile(null);
-      // Reset file input
       const fileInput = document.getElementById('file-input') as HTMLInputElement;
       if (fileInput) fileInput.value = '';
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Submission failed';
       setError(message);
-      // Remove the failed placeholder
       setSubmissions(prev => prev.filter(s => s.id !== tempId));
     } finally {
       setLoading(false);
@@ -79,7 +74,7 @@ export default function VerificationForm() {
   return (
     <section className="form-section">
       <div className="form-card">
-        <h2>Submit Work (Student)</h2>
+        <h2>Submit Work</h2>
 
         {!account && (
           <div className="alert warning">
