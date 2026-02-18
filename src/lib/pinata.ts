@@ -1,4 +1,3 @@
-/** Upload a file to IPFS via our Next.js API route (keeps Pinata keys server-side) */
 export async function uploadToIPFS(file: File): Promise<string> {
     const formData = new FormData();
     formData.append('file', file);
@@ -14,5 +13,5 @@ export async function uploadToIPFS(file: File): Promise<string> {
     }
 
     const data = await res.json();
-    return data.cid; // e.g. "QmXyz..." or "bafy..."
+    return data.cid;
 }
