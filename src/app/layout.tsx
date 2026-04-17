@@ -17,9 +17,13 @@ export default function RootLayout({
       <head>
         <meta name="theme-color" content="#000000" />
       </head>
-      <body>
+      <body className="bg-black text-zinc-200 min-h-screen font-sans antialiased overflow-x-hidden">
         <WalletProvider>
-          <div className="page-shell">{children}</div>
+          <div className="fixed top-[-40%] left-[-20%] w-[80%] h-[80%] bg-[radial-gradient(ellipse,_rgba(255,255,255,0.03)_0%,_transparent_70%)] pointer-events-none -z-10" />
+          <div className="fixed bottom-[-30%] right-[-15%] w-[60%] h-[60%] bg-[radial-gradient(ellipse,_rgba(255,255,255,0.02)_0%,_transparent_70%)] pointer-events-none -z-10" />
+          <div className="relative flex justify-center p-4 min-h-screen">
+            {children}
+          </div>
         </WalletProvider>
       </body>
     </html>
