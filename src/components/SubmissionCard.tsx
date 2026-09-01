@@ -6,71 +6,88 @@ import { Submission } from './VerificationForm';
 export default function SubmissionCard({ submission }: { submission: Submission }) {
   const statusLabel = {
     uploading: 'Uploading to IPFS...',
-    submitting: 'Writing to blockchain...',
-    pending: 'Pending Approval',
-    approved: 'Approved',
+    submitting: 'Writing to Blockchain...',
+    pending: 'Pending Mentor Approval',
+    approved: 'Verified On-Chain',
   }[submission.status];
 
-  const borderClass = {
-    uploading: '!border-white/10 opacity-60',
-    submitting: '!border-white/10 opacity-60',
-    pending: '!border-yellow-400/15 hover:!border-yellow-400/30 hover:!shadow-[0_12px_40px_rgba(0,0,0,0.4),_0_0_30px_rgba(250,204,21,0.03)]',
-    approved: '!border-green-500/20 hover:!border-green-500/35 hover:!shadow-[0_12px_40px_rgba(0,0,0,0.4),_0_0_30px_rgba(34,197,94,0.05)]',
-  }[submission.status];
-
-  const textClass = {
-    uploading: 'text-zinc-500',
-    submitting: 'text-zinc-500',
-    pending: 'text-yellow-400',
-    approved: 'text-green-500',
+  const statusBg = {
+    uploading: 'var(--nb-yellow)',
+    submitting: 'var(--nb-yellow)',
+    pending: 'var(--nb-pink)',
+    approved: 'var(--nb-green)',
   }[submission.status];
 
   return (
-    <div className={`relative mt-3.5 overflow-hidden rounded-[14px] border border-white/5 bg-white/5 p-5 backdrop-blur-md transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] animate-[fadeInUp_0.5s_ease_both] before:absolute before:inset-0 before:h-px before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent)] before:opacity-0 before:transition-opacity before:duration-300 hover:-translate-y-0.5 hover:border-white/10 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4),_0_0_30px_rgba(255,255,255,0.02)] hover:before:opacity-1 ${borderClass}`}>
-      <div className="flex items-center justify-between">
+    <div
+      className="nb-card p-5"
+      style={{
+        animation: 'fadeInUp 0.4s ease both',
+      }}
+    >
+      <div className="flex flex-wrap items-center justify-between gap-3 pb-3" style={{ borderBottom: '2px solid var(--nb-black)' }}>
         <div>
-          <div className="font-outfit text-[15px] font-extrabold tracking-[-0.2px] text-white">{submission.title}</div>
-          <div className={`mt-1.5 text-xs font-bold tracking-[0.2px] ${textClass}`}>{statusLabel}</div>
+          <h4 className="text-base font-bold tracking-tight">{submission.title}</h4>
+          <span className="text-xs text-zinc-500 font-mono">ID: #{submission.id}</span>
         </div>
+
+        <span
+          className="nb-badge"
+          style={{
+            background: statusBg,
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            fontSize: '11px',
+          }}
+        >
+          {submission.status === 'approved' && (
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          )}
+          {statusLabel}
+        </span>
       </div>
 
-      <div className="mt-3 flex flex-col gap-1.5 border-t border-white/5 pt-3 text-xs text-zinc-500">
+      <div className="mt-4 flex flex-col gap-2.5 text-xs">
         {submission.cid && (
-          <div>
-            IPFS CID:{' '}
+          <div className="flex flex-wrap items-center justify-between gap-2 p-2.5" style={{ background: 'var(--nb-input-bg)', border: '2px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+            <span className="font-bold uppercase tracking-wider text-zinc-600">IPFS CID</span>
             <a
               href={ipfsGatewayUrl(submission.cid)}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[11px] tracking-[0.2px] text-zinc-400 underline decoration-white/10 underline-offset-2 transition-colors duration-300 hover:text-white hover:decoration-white/30"
+              className="font-mono font-bold text-xs underline hover:bg-[var(--nb-yellow)] px-1.5 py-0.5 rounded transition-colors"
             >
-              {submission.cid.slice(0, 16)}...
+              {submission.cid.slice(0, 14)}...{submission.cid.slice(-8)} ↗
             </a>
           </div>
         )}
+
         {submission.txHash && (
-          <div>
-            Tx Hash:{' '}
+          <div className="flex flex-wrap items-center justify-between gap-2 p-2.5" style={{ background: 'var(--nb-input-bg)', border: '2px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+            <span className="font-bold uppercase tracking-wider text-zinc-600">Creation Tx</span>
             <a
               href={polygonscanTxUrl(submission.txHash)}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[11px] tracking-[0.2px] text-zinc-400 underline decoration-white/10 underline-offset-2 transition-colors duration-300 hover:text-white hover:decoration-white/30"
+              className="font-mono font-bold text-xs underline hover:bg-[var(--nb-yellow)] px-1.5 py-0.5 rounded transition-colors"
             >
-              {submission.txHash.slice(0, 16)}...
+              {submission.txHash.slice(0, 10)}...{submission.txHash.slice(-6)} ↗
             </a>
           </div>
         )}
+
         {submission.approvalTxHash && (
-          <div>
-            Approval Tx:{' '}
+          <div className="flex flex-wrap items-center justify-between gap-2 p-2.5" style={{ background: 'var(--nb-input-bg)', border: '2px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+            <span className="font-bold uppercase tracking-wider text-zinc-600">Approval Tx</span>
             <a
               href={polygonscanTxUrl(submission.approvalTxHash)}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[11px] tracking-[0.2px] text-zinc-400 underline decoration-white/10 underline-offset-2 transition-colors duration-300 hover:text-white hover:decoration-white/30"
+              className="font-mono font-bold text-xs underline hover:bg-[var(--nb-green)] px-1.5 py-0.5 rounded transition-colors"
             >
-              {submission.approvalTxHash.slice(0, 16)}...
+              {submission.approvalTxHash.slice(0, 10)}...{submission.approvalTxHash.slice(-6)} ↗
             </a>
           </div>
         )}
