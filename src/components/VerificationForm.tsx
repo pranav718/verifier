@@ -81,32 +81,40 @@ export default function VerificationForm() {
   };
 
   return (
-    <section className="mt-2 animate-[fadeInUp_0.8s_ease_0.4s_both]">
-      <div className="group relative mb-8 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md transition-all duration-400 hover:border-white/10 hover:shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.05)] before:absolute before:-left-full before:top-0 before:h-px before:w-full before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] before:transition-[left] before:duration-600 hover:before:left-full">
-        <h2 className="mb-6 font-outfit text-lg font-extrabold tracking-[-0.4px] text-white">Submit Work</h2>
+    <section className="mt-2" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
+      <div className="nb-card p-6 sm:p-8 mb-8">
+        <div className="flex items-center justify-between mb-6 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+          <h2 className="text-xl font-bold tracking-tight">Submit Work Credential</h2>
+          <span className="nb-badge" style={{ background: 'var(--nb-yellow)' }}>IPFS + Polygon</span>
+        </div>
 
         {!account && (
-          <div className="mb-6 rounded-lg border border-white/10 bg-white/5 p-4 text-[13px] font-medium leading-[1.6] text-zinc-400 backdrop-blur-md animate-[fadeInUp_0.4s_ease]">
-            Connect your MetaMask wallet to submit work to the blockchain.
+          <div className="nb-alert-info mb-6 flex items-center gap-2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+            Connect your Web3 wallet (MetaMask) above to submit proof to the blockchain.
           </div>
         )}
 
-        <form className="flex flex-col gap-[22px]" onSubmit={handleSubmit}>
-          <label className="flex flex-col text-[13px] font-medium tracking-normal text-zinc-500">
+        <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+          <label className="flex flex-col text-xs font-bold uppercase tracking-wider text-zinc-700">
             Project / Task Title
             <input
-              className="mt-2 rounded-lg border border-white/10 bg-white/5 p-3 text-sm text-zinc-200 backdrop-blur-sm transition-all duration-300 placeholder-zinc-700 focus:border-white/25 focus:bg-[rgba(255,255,255,0.05)] focus:outline-none focus:ring-[3px] focus:ring-white/5 disabled:opacity-50"
+              className="nb-input mt-2"
               value={title}
               onChange={e => setTitle(e.target.value)}
-              placeholder="e.g. Frontend for Todo App"
+              placeholder="e.g. Distributed Consensus Engine in Go"
               disabled={loading}
             />
           </label>
 
-          <label className="flex flex-col text-[13px] font-medium tracking-normal text-zinc-500">
-            Proof File (uploaded to IPFS)
+          <label className="flex flex-col text-xs font-bold uppercase tracking-wider text-zinc-700">
+            Proof Artifact (PDF, Image, Zip — Pinned to IPFS)
             <input
-              className="mt-2 rounded-lg border border-white/10 bg-white/5 p-3 text-sm text-zinc-200 backdrop-blur-sm transition-all duration-300 focus:border-white/25 focus:bg-[rgba(255,255,255,0.05)] focus:outline-none focus:ring-[3px] focus:ring-white/5 disabled:opacity-50 file:cursor-pointer file:border-0 file:bg-transparent file:text-zinc-500"
+              className="nb-input mt-2 file:mr-4 file:py-1 file:px-3 file:rounded file:border-2 file:border-black file:text-xs file:font-bold file:bg-[var(--nb-yellow)] file:cursor-pointer"
               id="file-input"
               type="file"
               onChange={e => setFile(e.target.files?.[0] || null)}
@@ -114,16 +122,35 @@ export default function VerificationForm() {
             />
           </label>
 
-          {error && <div className="rounded-lg border border-red-500/10 bg-white/5 p-4 text-[13px] font-medium leading-[1.6] text-red-500 backdrop-blur-md animate-[fadeInUp_0.4s_ease]">{error}</div>}
+          {error && (
+            <div className="nb-alert-error flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              {error}
+            </div>
+          )}
 
           {bcStep >= 0 && <BlockchainSteps currentStep={bcStep} />}
 
-          <div className="mt-3 flex gap-3">
-            <button className="relative inline-flex overflow-hidden items-center gap-1.5 rounded-lg border-none bg-white px-5 py-2.5 text-[13px] font-bold tracking-[-0.1px] text-black shadow-[0_0_20px_rgba(255,255,255,0.1),_0_2px_8px_rgba(0,0,0,0.3)] transition-all duration-300 before:absolute before:-left-full before:top-0 before:h-full before:w-full before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] before:transition-[left] before:duration-500 hover:before:left-full hover:bg-zinc-100 hover:-translate-y-px hover:shadow-[0_0_30px_rgba(255,255,255,0.2),_0_4px_16px_rgba(0,0,0,0.3)] active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-35" type="submit" disabled={loading || !account}>
-              {loading ? 'Processing...' : 'Submit to Blockchain'}
-            </button>
+          <div className="mt-2 flex flex-wrap gap-3">
             <button
-              className="relative inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-transparent px-5 py-2.5 text-[13px] font-bold tracking-[-0.1px] text-zinc-400 backdrop-blur-sm transition-all duration-300 hover:-translate-y-px hover:border-white/25 hover:bg-white/5 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.03)] disabled:cursor-not-allowed disabled:opacity-35"
+              className="nb-btn nb-btn-primary"
+              type="submit"
+              disabled={loading || !account}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="17 8 12 3 7 8" />
+                <line x1="12" y1="3" x2="12" y2="15" />
+              </svg>
+              {loading ? 'Submitting to Polygon...' : 'Submit to Blockchain'}
+            </button>
+
+            <button
+              className="nb-btn nb-btn-outline"
               type="button"
               onClick={() => { setTitle(''); setFile(null); setError(null); }}
               disabled={loading}
@@ -134,16 +161,23 @@ export default function VerificationForm() {
         </form>
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-[rgba(255,255,255,0.01)] p-7 backdrop-blur-md">
-        <h3 className="mb-4 font-outfit text-[17px] font-extrabold tracking-[-0.3px] text-white">Your Submissions</h3>
+      <div className="nb-card p-6 sm:p-8">
+        <div className="flex items-center justify-between mb-4 pb-3" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+          <h3 className="text-lg font-bold">Your Active Submissions</h3>
+          <span className="nb-badge" style={{ background: 'var(--nb-input-bg)' }}>{submissions.length} Total</span>
+        </div>
 
         {submissions.length === 0 && (
-          <p className="text-sm leading-[1.7] text-zinc-600">No submissions yet. Upload a file and submit to the blockchain.</p>
+          <p className="text-sm leading-relaxed text-zinc-600 py-4 text-center">
+            No submissions in this session yet. Upload a proof document and write to chain above.
+          </p>
         )}
 
-        {submissions.map(s => (
-          <SubmissionCard key={s.id} submission={s} />
-        ))}
+        <div className="flex flex-col gap-4">
+          {submissions.map(s => (
+            <SubmissionCard key={s.id} submission={s} />
+          ))}
+        </div>
       </div>
     </section>
   );
