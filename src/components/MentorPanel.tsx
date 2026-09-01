@@ -159,11 +159,16 @@ export default function MentorPanel() {
 
     if (!account) {
         return (
-            <section className="mt-2 animate-[fadeInUp_0.8s_ease_0.4s_both]">
-                <div className="group relative mb-8 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md transition-all duration-400 hover:border-white/10 hover:shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.05)] before:absolute before:-left-full before:top-0 before:h-px before:w-full before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] before:transition-[left] before:duration-600 hover:before:left-full">
-                    <h2 className="mb-6 font-outfit text-lg font-extrabold tracking-[-0.4px] text-white">Mentor Verification</h2>
-                    <div className="mb-6 rounded-lg border border-white/10 bg-white/5 p-4 text-[13px] font-medium leading-[1.6] text-zinc-400 backdrop-blur-md animate-[fadeInUp_0.4s_ease]">
-                        Connect your MetaMask wallet to access the mentor panel.
+            <section className="mt-2" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
+                <div className="nb-card p-6 sm:p-8 mb-8">
+                    <h2 className="text-xl font-bold mb-4 tracking-tight">Mentor Access Gateway</h2>
+                    <div className="nb-alert-info flex items-center gap-2">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="16" x2="12" y2="12" />
+                            <line x1="12" y1="8" x2="12.01" y2="8" />
+                        </svg>
+                        Connect your Web3 MetaMask wallet above to access the mentor dashboard.
                     </div>
                 </div>
             </section>
@@ -172,10 +177,10 @@ export default function MentorPanel() {
 
     if (checkingVerification) {
         return (
-            <section className="mt-2 animate-[fadeInUp_0.8s_ease_0.4s_both]">
-                <div className="group relative mb-8 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md transition-all duration-400 hover:border-white/10 hover:shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.05)] before:absolute before:-left-full before:top-0 before:h-px before:w-full before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] before:transition-[left] before:duration-600 hover:before:left-full">
-                    <h2 className="mb-6 font-outfit text-lg font-extrabold tracking-[-0.4px] text-white">Mentor Verification</h2>
-                    <p className="text-sm leading-[1.7] text-zinc-600">Checking verification status...</p>
+            <section className="mt-2" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
+                <div className="nb-card p-6 sm:p-8 mb-8 text-center">
+                    <h2 className="text-xl font-bold mb-4 tracking-tight">Checking Mentor Credentials</h2>
+                    <p className="text-sm font-bold text-zinc-600 animate-pulse">Querying verified mentor status on Polygon blockchain...</p>
                 </div>
             </section>
         );
@@ -183,15 +188,22 @@ export default function MentorPanel() {
 
     if (!isVerified && !showRegister) {
         return (
-            <section className="mt-2 animate-[fadeInUp_0.8s_ease_0.4s_both]">
-                <div className="group relative mb-8 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md transition-all duration-400 hover:border-white/10 hover:shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.05)] before:absolute before:-left-full before:top-0 before:h-px before:w-full before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] before:transition-[left] before:duration-600 hover:before:left-full">
-                    <h2 className="mb-6 font-outfit text-lg font-extrabold tracking-[-0.4px] text-white">Mentor Verification Required</h2>
-                    <p className="text-sm leading-[1.7] text-zinc-600 mb-5">
-                        You must verify your corporate identity before approving submissions.
-                        This ensures only real employees from verified organizations can act as mentors.
+            <section className="mt-2" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
+                <div className="nb-card p-6 sm:p-8 mb-8">
+                    <div className="flex items-center justify-between mb-4 pb-3" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+                        <h2 className="text-xl font-bold tracking-tight">Corporate Affiliation Required</h2>
+                        <span className="nb-badge" style={{ background: 'var(--nb-yellow)' }}>Unverified</span>
+                    </div>
+
+                    <p className="text-sm leading-relaxed text-zinc-700 mb-6">
+                        To approve student work submissions, you must prove your organizational identity through corporate email validation. This prevents unauthorized approvals and preserves on-chain integrity.
                     </p>
-                    <button className="relative inline-flex overflow-hidden items-center gap-1.5 rounded-lg border-none bg-white px-5 py-2.5 text-[13px] font-bold tracking-[-0.1px] text-black shadow-[0_0_20px_rgba(255,255,255,0.1),_0_2px_8px_rgba(0,0,0,0.3)] transition-all duration-300 before:absolute before:-left-full before:top-0 before:h-full before:w-full before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] before:transition-[left] before:duration-500 hover:before:left-full hover:bg-zinc-100 hover:-translate-y-px hover:shadow-[0_0_30px_rgba(255,255,255,0.2),_0_4px_16px_rgba(0,0,0,0.3)] active:translate-y-0" onClick={() => setShowRegister(true)}>
-                        Verify Corporate Identity
+
+                    <button className="nb-btn nb-btn-primary" onClick={() => setShowRegister(true)}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                        Verify Corporate Identity (OTP)
                     </button>
                 </div>
             </section>
@@ -200,16 +212,19 @@ export default function MentorPanel() {
 
     if (!isVerified && showRegister) {
         return (
-            <section className="mt-2 animate-[fadeInUp_0.8s_ease_0.4s_both]">
-                <div className="group relative mb-8 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md transition-all duration-400 hover:border-white/10 hover:shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.05)] before:absolute before:-left-full before:top-0 before:h-px before:w-full before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] before:transition-[left] before:duration-600 hover:before:left-full">
-                    <h2 className="mb-6 font-outfit text-lg font-extrabold tracking-[-0.4px] text-white">Corporate Email Verification</h2>
+            <section className="mt-2" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
+                <div className="nb-card p-6 sm:p-8 mb-8">
+                    <div className="flex items-center justify-between mb-6 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+                        <h2 className="text-xl font-bold tracking-tight">Corporate Email Verification</h2>
+                        <span className="nb-badge" style={{ background: 'var(--nb-blue)' }}>Step {!otpSent ? '1 of 2' : '2 of 2'}</span>
+                    </div>
 
                     {!otpSent ? (
-                        <div className="flex flex-col gap-[22px]">
-                            <label className="flex flex-col text-[13px] font-medium tracking-normal text-zinc-500">
-                                Corporate Email Address
+                        <div className="flex flex-col gap-5">
+                            <label className="flex flex-col text-xs font-bold uppercase tracking-wider text-zinc-700">
+                                Corporate Email Address (@google.com, @microsoft.com, etc.)
                                 <input
-                                    className="mt-2 rounded-lg border border-white/10 bg-white/5 p-3 text-sm text-zinc-200 backdrop-blur-sm transition-all duration-300 placeholder-zinc-700 focus:border-white/25 focus:bg-[rgba(255,255,255,0.05)] focus:outline-none focus:ring-[3px] focus:ring-white/5 disabled:opacity-50"
+                                    className="nb-input mt-2"
                                     type="email"
                                     value={emailInput}
                                     onChange={e => setEmailInput(e.target.value)}
@@ -217,41 +232,51 @@ export default function MentorPanel() {
                                     disabled={registering}
                                 />
                             </label>
-                            <p className="text-xs leading-[1.7] text-zinc-600">
-                                We will send a verification code to this email to confirm your affiliation.
+
+                            <p className="text-xs leading-relaxed text-zinc-600">
+                                A 6-digit verification code will be dispatched to your corporate inbox.
                             </p>
-                            {registerError && <div className="rounded-lg border border-red-500/10 bg-white/5 p-4 text-[13px] font-medium leading-[1.6] text-red-500 backdrop-blur-md animate-[fadeInUp_0.4s_ease]">{registerError}</div>}
-                            <div className="mt-3 flex gap-3">
-                                <button className="relative inline-flex overflow-hidden items-center gap-1.5 rounded-lg border-none bg-white px-5 py-2.5 text-[13px] font-bold tracking-[-0.1px] text-black shadow-[0_0_20px_rgba(255,255,255,0.1),_0_2px_8px_rgba(0,0,0,0.3)] transition-all duration-300 before:absolute before:-left-full before:top-0 before:h-full before:w-full before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] before:transition-[left] before:duration-500 hover:before:left-full hover:bg-zinc-100 hover:-translate-y-px hover:shadow-[0_0_30px_rgba(255,255,255,0.2),_0_4px_16px_rgba(0,0,0,0.3)] active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-35" onClick={handleSendOtp} disabled={registering}>
-                                    Send Verification Code
+
+                            {registerError && <div className="nb-alert-error">{registerError}</div>}
+
+                            <div className="flex gap-3 mt-2">
+                                <button className="nb-btn nb-btn-primary" onClick={handleSendOtp} disabled={registering}>
+                                    {registering ? 'Sending Code...' : 'Send Verification OTP'}
                                 </button>
-                                <button className="relative inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-transparent px-5 py-2.5 text-[13px] font-bold tracking-[-0.1px] text-zinc-400 backdrop-blur-sm transition-all duration-300 hover:-translate-y-px hover:border-white/25 hover:bg-white/5 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.03)] disabled:cursor-not-allowed disabled:opacity-35" onClick={() => { setShowRegister(false); setRegisterError(null); }}>
+                                <button className="nb-btn nb-btn-outline" onClick={() => { setShowRegister(false); setRegisterError(null); }}>
                                     Cancel
                                 </button>
                             </div>
                         </div>
                     ) : (
-                        <div className="flex flex-col gap-[22px]">
-                            <div className="mb-2 rounded-lg border border-green-500/10 bg-white/5 p-4 text-[13px] font-medium leading-[1.6] text-green-500 backdrop-blur-md animate-[fadeInUp_0.4s_ease]">
-                                Verification code sent to {emailInput}
+                        <div className="flex flex-col gap-5">
+                            <div className="nb-alert-success flex items-center gap-2">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                One-time passcode sent to <span className="font-bold underline">{emailInput}</span>
                             </div>
-                            <label className="flex flex-col text-[13px] font-medium tracking-normal text-zinc-500">
-                                Verification Code
+
+                            <label className="flex flex-col text-xs font-bold uppercase tracking-wider text-zinc-700">
+                                Enter 6-Digit Verification Code
                                 <input
-                                    className="mt-2 rounded-lg border border-white/10 bg-white/5 p-3 text-sm text-zinc-200 backdrop-blur-sm transition-all duration-300 placeholder-zinc-700 focus:border-white/25 focus:bg-[rgba(255,255,255,0.05)] focus:outline-none focus:ring-[3px] focus:ring-white/5 disabled:opacity-50"
+                                    className="nb-input mt-2 font-mono text-base tracking-widest text-center"
                                     type="text"
                                     value={otpInput}
                                     onChange={e => setOtpInput(e.target.value)}
-                                    placeholder="Enter code"
+                                    placeholder="123456"
                                     disabled={registering}
+                                    maxLength={6}
                                 />
                             </label>
-                            {registerError && <div className="rounded-lg border border-red-500/10 bg-white/5 p-4 text-[13px] font-medium leading-[1.6] text-red-500 backdrop-blur-md animate-[fadeInUp_0.4s_ease]">{registerError}</div>}
-                            <div className="mt-3 flex gap-3">
-                                <button className="relative inline-flex overflow-hidden items-center gap-1.5 rounded-lg border-none bg-white px-5 py-2.5 text-[13px] font-bold tracking-[-0.1px] text-black shadow-[0_0_20px_rgba(255,255,255,0.1),_0_2px_8px_rgba(0,0,0,0.3)] transition-all duration-300 before:absolute before:-left-full before:top-0 before:h-full before:w-full before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] before:transition-[left] before:duration-500 hover:before:left-full hover:bg-zinc-100 hover:-translate-y-px hover:shadow-[0_0_30px_rgba(255,255,255,0.2),_0_4px_16px_rgba(0,0,0,0.3)] active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-35" onClick={handleVerifyOtp} disabled={registering}>
-                                    {registering ? 'Registering on Blockchain...' : 'Verify & Register'}
+
+                            {registerError && <div className="nb-alert-error">{registerError}</div>}
+
+                            <div className="flex gap-3 mt-2">
+                                <button className="nb-btn nb-btn-primary" onClick={handleVerifyOtp} disabled={registering}>
+                                    {registering ? 'Registering on Blockchain...' : 'Verify & Register on Chain'}
                                 </button>
-                                <button className="relative inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-transparent px-5 py-2.5 text-[13px] font-bold tracking-[-0.1px] text-zinc-400 backdrop-blur-sm transition-all duration-300 hover:-translate-y-px hover:border-white/25 hover:bg-white/5 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.03)] disabled:cursor-not-allowed disabled:opacity-35" onClick={() => { setOtpSent(false); setRegisterError(null); }}>
+                                <button className="nb-btn nb-btn-outline" onClick={() => { setOtpSent(false); setRegisterError(null); }}>
                                     Back
                                 </button>
                             </div>
@@ -261,14 +286,18 @@ export default function MentorPanel() {
             </section>
         );
     }
-    return (
-        <section className="mt-2 animate-[fadeInUp_0.8s_ease_0.4s_both]">
-            <div className="group relative mb-8 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md transition-all duration-400 hover:border-white/10 hover:shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.05)] before:absolute before:-left-full before:top-0 before:h-px before:w-full before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] before:transition-[left] before:duration-600 hover:before:left-full">
-                <h2 className="mb-6 font-outfit text-lg font-extrabold tracking-[-0.4px] text-white">Approve Submissions</h2>
 
-                <div className="mb-4 flex">
-                    <div className="inline-flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1.5 text-xs font-semibold text-green-500">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    return (
+        <section className="mt-2" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
+            <div className="nb-card p-6 sm:p-8 mb-8">
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+                    <div>
+                        <h2 className="text-xl font-bold tracking-tight">Mentor Governance Dashboard</h2>
+                        <p className="text-xs text-zinc-600 mt-1">Review student proof submissions and sign off on credentials.</p>
+                    </div>
+
+                    <div className="nb-badge" style={{ background: 'var(--nb-green)', padding: '6px 14px' }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
                             <path d="m9 12 2 2 4-4" />
                         </svg>
@@ -276,75 +305,118 @@ export default function MentorPanel() {
                     </div>
                 </div>
 
-                <button
-                    className="relative inline-flex overflow-hidden items-center gap-1.5 rounded-lg border-none bg-white px-5 py-2.5 text-[13px] font-bold tracking-[-0.1px] text-black shadow-[0_0_20px_rgba(255,255,255,0.1),_0_2px_8px_rgba(0,0,0,0.3)] transition-all duration-300 before:absolute before:-left-full before:top-0 before:h-full before:w-full before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] before:transition-[left] before:duration-500 hover:before:left-full hover:bg-zinc-100 hover:-translate-y-px hover:shadow-[0_0_30px_rgba(255,255,255,0.2),_0_4px_16px_rgba(0,0,0,0.3)] active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-35 mt-4"
-                    onClick={fetchSubmissions}
-                    disabled={loadingList}
-                >
-                    {loadingList ? 'Loading...' : 'Load Submissions from Blockchain'}
-                </button>
+                <div className="flex flex-wrap gap-3">
+                    <button
+                        className="nb-btn nb-btn-primary"
+                        onClick={fetchSubmissions}
+                        disabled={loadingList}
+                    >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="23 4 23 10 17 10" />
+                            <polyline points="1 20 1 14 7 14" />
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+                        </svg>
+                        {loadingList ? 'Querying Polygon...' : 'Fetch All Submissions from Blockchain'}
+                    </button>
+                </div>
 
-                {error && <div className="mt-3.5 rounded-lg border border-red-500/10 bg-white/5 p-4 text-[13px] font-medium leading-[1.6] text-red-500 backdrop-blur-md animate-[fadeInUp_0.4s_ease]">{error}</div>}
-                {successMsg && <div className="mt-3.5 rounded-lg border border-green-500/10 bg-white/5 p-4 text-[13px] font-medium leading-[1.6] text-green-500 backdrop-blur-md animate-[fadeInUp_0.4s_ease]">{successMsg}</div>}
+                {error && <div className="nb-alert-error mt-4">{error}</div>}
+                {successMsg && <div className="nb-alert-success mt-4">{successMsg}</div>}
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-[rgba(255,255,255,0.01)] p-7 backdrop-blur-md">
-                <h3 className="mb-4 font-outfit text-[17px] font-extrabold tracking-[-0.3px] text-white">All On-Chain Submissions</h3>
+            <div className="nb-card p-6 sm:p-8">
+                <div className="flex items-center justify-between mb-4 pb-3" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+                    <h3 className="text-lg font-bold">All On-Chain Records</h3>
+                    <span className="nb-badge" style={{ background: 'var(--nb-input-bg)' }}>{submissions.length} Total</span>
+                </div>
 
                 {submissions.length === 0 && !loadingList && (
-                    <p className="text-sm leading-[1.7] text-zinc-600">Click above to load submissions from the blockchain.</p>
+                    <p className="text-sm leading-relaxed text-zinc-600 py-6 text-center">
+                        Click "Fetch All Submissions from Blockchain" above to load global student submissions.
+                    </p>
                 )}
 
-                {submissions.map(sub => {
-                    const statusConfig = sub.approved
-                        ? '!border-green-500/20 hover:!border-green-500/35 hover:!shadow-[0_12px_40px_rgba(0,0,0,0.4),_0_0_30px_rgba(34,197,94,0.05)] text-green-500'
-                        : '!border-yellow-400/15 hover:!border-yellow-400/30 hover:!shadow-[0_12px_40px_rgba(0,0,0,0.4),_0_0_30px_rgba(250,204,21,0.03)] text-yellow-400';
-                        
-                    return (
-                        <div key={sub.id} className={`relative mt-3.5 overflow-hidden rounded-[14px] border border-white/5 bg-white/5 p-5 backdrop-blur-md transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] animate-[fadeInUp_0.5s_ease_both] before:absolute before:inset-0 before:h-px before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent)] before:opacity-0 before:transition-opacity before:duration-300 hover:-translate-y-0.5 hover:border-white/10 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4),_0_0_30px_rgba(255,255,255,0.02)] hover:before:opacity-1 ${statusConfig}`}>
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <div className="font-outfit text-[15px] font-extrabold tracking-[-0.2px] text-white">{sub.title}</div>
-                                    <div className="mt-1 text-xs text-zinc-500 w-full flex gap-1">
-                                        Student: <span className="font-mono text-[11px] tracking-[0.2px]">{sub.student.slice(0, 6)}...{sub.student.slice(-4)}</span>
+                <div className="flex flex-col gap-4">
+                    {submissions.map(sub => {
+                        return (
+                            <div
+                                key={sub.id}
+                                className="p-5"
+                                style={{
+                                    background: sub.approved ? '#F8FFF9' : '#FFFDF5',
+                                    border: 'var(--nb-border)',
+                                    borderRadius: 'var(--nb-radius)',
+                                    boxShadow: 'var(--nb-shadow-sm)',
+                                }}
+                            >
+                                <div className="flex flex-wrap items-center justify-between gap-3 pb-3" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+                                    <div>
+                                        <h4 className="text-base font-bold tracking-tight">{sub.title}</h4>
+                                        <div className="mt-1 text-xs text-zinc-600 flex items-center gap-1.5">
+                                            Student: <span className="font-mono font-bold bg-white px-1.5 py-0.5 border border-black rounded text-[11px]">{sub.student.slice(0, 6)}...{sub.student.slice(-4)}</span>
+                                        </div>
                                     </div>
-                                    <div className={`mt-1.5 text-xs font-bold tracking-[0.2px] ${sub.approved ? 'text-green-500' : 'text-yellow-400'}`}>
-                                        {sub.approved ? 'Approved' : 'Pending'}
-                                    </div>
-                                </div>
 
-                                <div className="flex items-center gap-3">
-                                    {!sub.approved && account && (
-                                        <button
-                                            className="relative inline-flex overflow-hidden items-center gap-1.5 rounded-lg border-none bg-white px-3.5 py-[7px] text-xs font-bold tracking-[-0.1px] text-black shadow-[0_0_20px_rgba(255,255,255,0.1),_0_2px_8px_rgba(0,0,0,0.3)] transition-all duration-300 before:absolute before:-left-full before:top-0 before:h-full before:w-full before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] before:transition-[left] before:duration-500 hover:before:left-full hover:bg-zinc-100 hover:-translate-y-px hover:shadow-[0_0_30px_rgba(255,255,255,0.2),_0_4px_16px_rgba(0,0,0,0.3)] active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-35"
-                                            onClick={() => handleApprove(sub.id)}
-                                            disabled={approvingId === sub.id}
+                                    <div className="flex items-center gap-2">
+                                        {!sub.approved && account && (
+                                            <button
+                                                className="nb-btn nb-btn-primary"
+                                                style={{ padding: '6px 14px', fontSize: '12px' }}
+                                                onClick={() => handleApprove(sub.id)}
+                                                disabled={approvingId === sub.id}
+                                            >
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                                                    <path d="m9 12 2 2 4-4" />
+                                                </svg>
+                                                {approvingId === sub.id ? 'Approving on Chain...' : 'Approve Submission'}
+                                            </button>
+                                        )}
+
+                                        <span
+                                            className="nb-badge"
+                                            style={{
+                                                background: sub.approved ? 'var(--nb-green)' : 'var(--nb-pink)',
+                                                fontSize: '11px',
+                                                textTransform: 'uppercase',
+                                            }}
                                         >
-                                            {approvingId === sub.id ? 'Approving...' : 'Approve'}
-                                        </button>
-                                    )}
-                                    {sub.approved && <div className="inline-flex items-center rounded-lg border border-green-500/20 bg-green-500/10 px-3 py-1 font-outfit text-[11px] font-bold tracking-[0.2px] text-green-500 uppercase">Approved</div>}
+                                            {sub.approved ? 'Approved' : 'Pending'}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="mt-3 flex flex-col gap-1.5 border-t border-white/5 pt-3 text-xs text-zinc-500">
-                                <div>
-                                    CID:{' '}
-                                    <a href={ipfsGatewayUrl(sub.cid)} target="_blank" rel="noopener noreferrer" className="font-mono text-[11px] tracking-[0.2px] text-zinc-400 underline decoration-white/10 underline-offset-2 transition-colors duration-300 hover:text-white hover:decoration-white/30">
-                                        {sub.cid.slice(0, 20)}...
-                                    </a>
+                                <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                                    <div className="p-2" style={{ background: 'var(--nb-input-bg)', border: '1px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+                                        <span className="font-bold text-zinc-500 block mb-0.5">IPFS Artifact</span>
+                                        <a href={ipfsGatewayUrl(sub.cid)} target="_blank" rel="noopener noreferrer" className="font-mono font-bold underline hover:bg-[var(--nb-yellow)]">
+                                            {sub.cid.slice(0, 16)}... ↗
+                                        </a>
+                                    </div>
+
+                                    {sub.mentor !== '0x0000000000000000000000000000000000000000' && (
+                                        <div className="p-2" style={{ background: 'var(--nb-input-bg)', border: '1px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+                                            <span className="font-bold text-zinc-500 block mb-0.5">Verified Mentor</span>
+                                            <span className="font-mono font-bold">{sub.mentor.slice(0, 6)}...{sub.mentor.slice(-4)}</span>
+                                        </div>
+                                    )}
+
+                                    <div className="p-2" style={{ background: 'var(--nb-input-bg)', border: '1px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+                                        <span className="font-bold text-zinc-500 block mb-0.5">Submitted At</span>
+                                        <span>{new Date(sub.submittedAt * 1000).toLocaleString()}</span>
+                                    </div>
+
+                                    {sub.approvedAt > 0 && (
+                                        <div className="p-2" style={{ background: 'var(--nb-input-bg)', border: '1px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+                                            <span className="font-bold text-zinc-500 block mb-0.5">Approved At</span>
+                                            <span>{new Date(sub.approvedAt * 1000).toLocaleString()}</span>
+                                        </div>
+                                    )}
                                 </div>
-                                {sub.mentor !== '0x0000000000000000000000000000000000000000' && (
-                                    <div>Mentor: <span className="font-mono text-[11px] tracking-[0.2px]">{sub.mentor.slice(0, 6)}...{sub.mentor.slice(-4)}</span></div>
-                                )}
-                                <div>Submitted: {new Date(sub.submittedAt * 1000).toLocaleString()}</div>
-                                {sub.approvedAt > 0 && (
-                                    <div>Approved: {new Date(sub.approvedAt * 1000).toLocaleString()}</div>
-                                )}
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+                </div>
             </div>
         </section>
     );
