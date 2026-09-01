@@ -42,36 +42,47 @@ export default function Home() {
 
       {/* ── Feature Cards ── */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-3" style={{ animation: 'fadeInUp 0.6s ease 0.2s both' }}>
-        <div className="nb-card flex flex-col items-center gap-3 p-6 text-center">
-          <span className="flex h-12 w-12 items-center justify-center" style={{ border: 'var(--nb-border)', borderRadius: 'var(--nb-radius)', background: 'var(--nb-yellow)' }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="17 8 12 3 7 8" />
-              <line x1="12" y1="3" x2="12" y2="15" />
-            </svg>
-          </span>
-          <div className="text-[15px] font-bold">Submit</div>
-          <div className="text-xs leading-[1.6]" style={{ color: '#666' }}>Upload proof to IPFS &amp; record CID on-chain</div>
+        <div className="nb-card relative flex flex-col items-start gap-3 p-6">
+          <div className="flex w-full items-center justify-between">
+            <span className="flex h-12 w-12 items-center justify-center" style={{ border: 'var(--nb-border)', borderRadius: 'var(--nb-radius)', background: 'var(--nb-yellow)' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="17 8 12 3 7 8" />
+                <line x1="12" y1="3" x2="12" y2="15" />
+              </svg>
+            </span>
+            <span className="font-mono text-xs font-bold px-2 py-0.5" style={{ background: 'var(--nb-input-bg)', border: '2px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>01</span>
+          </div>
+          <div className="text-base font-bold">1. Submit Work</div>
+          <div className="text-xs leading-[1.6]" style={{ color: '#555' }}>Upload proof to IPFS &amp; record cryptographically signed CID on-chain.</div>
         </div>
-        <div className="nb-card flex flex-col items-center gap-3 p-6 text-center">
-          <span className="flex h-12 w-12 items-center justify-center" style={{ border: 'var(--nb-border)', borderRadius: 'var(--nb-radius)', background: 'var(--nb-green)' }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
-              <path d="m9 12 2 2 4-4" />
-            </svg>
-          </span>
-          <div className="text-[15px] font-bold">Approve</div>
-          <div className="text-xs leading-[1.6]" style={{ color: '#666' }}>Mentors verify &amp; approve work on the blockchain</div>
+
+        <div className="nb-card relative flex flex-col items-start gap-3 p-6">
+          <div className="flex w-full items-center justify-between">
+            <span className="flex h-12 w-12 items-center justify-center" style={{ border: 'var(--nb-border)', borderRadius: 'var(--nb-radius)', background: 'var(--nb-green)' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            </span>
+            <span className="font-mono text-xs font-bold px-2 py-0.5" style={{ background: 'var(--nb-input-bg)', border: '2px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>02</span>
+          </div>
+          <div className="text-base font-bold">2. Approve Proof</div>
+          <div className="text-xs leading-[1.6]" style={{ color: '#555' }}>Verified mentors inspect student claims and seal approval on Polygon.</div>
         </div>
-        <div className="nb-card flex flex-col items-center gap-3 p-6 text-center">
-          <span className="flex h-12 w-12 items-center justify-center" style={{ border: 'var(--nb-border)', borderRadius: 'var(--nb-radius)', background: 'var(--nb-blue)' }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-          </span>
-          <div className="text-[15px] font-bold">Verify</div>
-          <div className="text-xs leading-[1.6]" style={{ color: '#666' }}>Recruiters check credentials directly from chain</div>
+
+        <div className="nb-card relative flex flex-col items-start gap-3 p-6">
+          <div className="flex w-full items-center justify-between">
+            <span className="flex h-12 w-12 items-center justify-center" style={{ border: 'var(--nb-border)', borderRadius: 'var(--nb-radius)', background: 'var(--nb-blue)' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </span>
+            <span className="font-mono text-xs font-bold px-2 py-0.5" style={{ background: 'var(--nb-input-bg)', border: '2px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>03</span>
+          </div>
+          <div className="text-base font-bold">3. Trustless Verification</div>
+          <div className="text-xs leading-[1.6]" style={{ color: '#555' }}>Recruiters and institutions scan QR codes for direct blockchain provenance.</div>
         </div>
       </div>
 
