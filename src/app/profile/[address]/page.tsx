@@ -87,15 +87,27 @@ export default function ProfilePage() {
                             <span className="text-xs font-bold uppercase tracking-wider text-zinc-600 block mb-1">Student Wallet Address</span>
                             <span className="font-mono text-sm sm:text-base font-bold break-all">{address}</span>
                         </div>
-                        <a
-                            href={polygonscanAddressUrl(address)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="nb-btn nb-btn-outline"
-                            style={{ padding: '6px 14px', fontSize: '12px' }}
-                        >
-                            View on Polygonscan ↗
-                        </a>
+                        <div className="flex flex-wrap gap-2">
+                            <button
+                                className="nb-btn nb-btn-outline"
+                                style={{ padding: '6px 14px', fontSize: '12px' }}
+                                onClick={() => {
+                                    navigator.clipboard.writeText(window.location.href);
+                                    alert('Profile URL copied to clipboard!');
+                                }}
+                            >
+                                Share Profile 📋
+                            </button>
+                            <a
+                                href={polygonscanAddressUrl(address)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="nb-btn nb-btn-outline"
+                                style={{ padding: '6px 14px', fontSize: '12px' }}
+                            >
+                                Polygonscan ↗
+                            </a>
+                        </div>
                     </div>
 
                     {/* ── Stats Grid ── */}
