@@ -238,7 +238,6 @@ export default function VerifyPage() {
         <main className="w-full max-w-[860px] mx-auto">
             <Header />
 
-            {/* ── Verify Hero ── */}
             <section className="relative mb-10 py-10 pb-10" style={{ borderBottom: '3px solid var(--nb-black)', animation: 'fadeInUp 0.6s ease' }}>
                 <h1 className="mb-4 text-4xl sm:text-5xl font-bold leading-tight tracking-[-2px]">
                     Verify Work Submission

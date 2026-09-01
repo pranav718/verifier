@@ -14,7 +14,6 @@ export default function Home() {
     <main className="w-full max-w-[860px] mx-auto">
       <Header />
 
-      {/* ── Hero Section ── */}
       <section className="relative mb-10 py-10 pb-10" style={{ borderBottom: '3px solid var(--nb-black)', animation: 'fadeInUp 0.6s ease' }}>
         <h1 className="mb-4 text-4xl sm:text-5xl font-bold leading-tight tracking-[-2px]">
           Blockchain&#8209;Based<br />Work Verification
@@ -40,7 +39,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Feature Cards ── */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-3" style={{ animation: 'fadeInUp 0.6s ease 0.2s both' }}>
         <div className="nb-card relative flex flex-col items-start gap-3 p-6">
           <div className="flex w-full items-center justify-between">
@@ -86,7 +84,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ── Tab Bar ── */}
       <div className="relative mb-8 mt-12 flex gap-3" style={{ borderBottom: '3px solid var(--nb-black)', paddingBottom: '0px', animation: 'fadeInUp 0.6s ease 0.2s both' }}>
         <button
           className={`flex items-center justify-center gap-2 cursor-pointer py-3.5 px-6 text-sm font-bold tracking-[-0.2px] transition-all`}

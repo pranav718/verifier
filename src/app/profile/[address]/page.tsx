@@ -64,7 +64,6 @@ export default function ProfilePage() {
         <main className="w-full max-w-[860px] mx-auto">
             <Header />
 
-            {/* ── Profile Hero ── */}
             <section className="relative mb-10 py-10 pb-10" style={{ borderBottom: '3px solid var(--nb-black)', animation: 'fadeInUp 0.6s ease' }}>
                 <div className="flex flex-wrap items-center gap-2 mb-3">
                     <span className="nb-badge" style={{ background: 'var(--nb-yellow)' }}>On-Chain Portfolio</span>
@@ -79,7 +78,6 @@ export default function ProfilePage() {
                 </p>
             </section>
 
-            {/* ── Profile Identity Card ── */}
             <div className="nb-card p-6 sm:p-8 mb-8" style={{ animation: 'fadeInUp 0.6s ease 0.2s both' }}>
                 <div className="flex flex-col gap-6">
                     <div className="flex flex-wrap items-center justify-between gap-4 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
@@ -110,7 +108,6 @@ export default function ProfilePage() {
                         </div>
                     </div>
 
-                    {/* ── Stats Grid ── */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="p-5 text-center" style={{ background: 'var(--nb-yellow)', border: 'var(--nb-border)', borderRadius: 'var(--nb-radius)', boxShadow: 'var(--nb-shadow-sm)' }}>
                             <span className="font-bold text-3xl block leading-none mb-1">{submissions.length}</span>
