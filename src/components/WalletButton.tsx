@@ -25,7 +25,6 @@ export default function WalletButton() {
     }
 
     return (
-    return (
         <div className="flex flex-wrap items-center gap-2 animate-[slide-in-right_0.5s_ease]">
             {error && <span className="text-xs text-red-500 animate-[fadeInUp_0.3s_ease]">{error}</span>}
             <button
