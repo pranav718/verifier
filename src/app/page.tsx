@@ -87,36 +87,48 @@ export default function Home() {
       </div>
 
       {/* ── Tab Bar ── */}
-      <div className="relative mb-8 mt-10 flex" style={{ borderBottom: '3px solid var(--nb-black)', animation: 'fadeInUp 0.6s ease 0.2s both' }}>
+      <div className="relative mb-8 mt-12 flex gap-3" style={{ borderBottom: '3px solid var(--nb-black)', paddingBottom: '0px', animation: 'fadeInUp 0.6s ease 0.2s both' }}>
         <button
-          className={`flex-1 cursor-pointer border-none py-3.5 text-center text-sm font-bold tracking-[-0.2px] transition-all`}
+          className={`flex items-center justify-center gap-2 cursor-pointer py-3.5 px-6 text-sm font-bold tracking-[-0.2px] transition-all`}
           style={{
-            background: activeTab === 'student' ? 'var(--nb-yellow)' : 'transparent',
-            borderTop: activeTab === 'student' ? '3px solid var(--nb-black)' : '3px solid transparent',
-            borderLeft: activeTab === 'student' ? '3px solid var(--nb-black)' : '3px solid transparent',
-            borderRight: activeTab === 'student' ? '3px solid var(--nb-black)' : '3px solid transparent',
-            borderBottom: 'none',
+            background: activeTab === 'student' ? 'var(--nb-yellow)' : 'var(--nb-card)',
+            borderTop: '3px solid var(--nb-black)',
+            borderLeft: '3px solid var(--nb-black)',
+            borderRight: '3px solid var(--nb-black)',
+            borderBottom: activeTab === 'student' ? '3px solid var(--nb-yellow)' : '3px solid var(--nb-black)',
             borderRadius: '8px 8px 0 0',
-            marginBottom: activeTab === 'student' ? '-3px' : '0',
+            marginBottom: '-3px',
+            boxShadow: activeTab === 'student' ? 'none' : 'inset 0 -2px 0 var(--nb-black)',
           }}
           onClick={() => setActiveTab('student')}
         >
-          Student
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+          </svg>
+          Student Portal
         </button>
+
         <button
-          className={`flex-1 cursor-pointer border-none py-3.5 text-center text-sm font-bold tracking-[-0.2px] transition-all`}
+          className={`flex items-center justify-center gap-2 cursor-pointer py-3.5 px-6 text-sm font-bold tracking-[-0.2px] transition-all`}
           style={{
-            background: activeTab === 'mentor' ? 'var(--nb-yellow)' : 'transparent',
-            borderTop: activeTab === 'mentor' ? '3px solid var(--nb-black)' : '3px solid transparent',
-            borderLeft: activeTab === 'mentor' ? '3px solid var(--nb-black)' : '3px solid transparent',
-            borderRight: activeTab === 'mentor' ? '3px solid var(--nb-black)' : '3px solid transparent',
-            borderBottom: 'none',
+            background: activeTab === 'mentor' ? 'var(--nb-yellow)' : 'var(--nb-card)',
+            borderTop: '3px solid var(--nb-black)',
+            borderLeft: '3px solid var(--nb-black)',
+            borderRight: '3px solid var(--nb-black)',
+            borderBottom: activeTab === 'mentor' ? '3px solid var(--nb-yellow)' : '3px solid var(--nb-black)',
             borderRadius: '8px 8px 0 0',
-            marginBottom: activeTab === 'mentor' ? '-3px' : '0',
+            marginBottom: '-3px',
+            boxShadow: activeTab === 'mentor' ? 'none' : 'inset 0 -2px 0 var(--nb-black)',
           }}
           onClick={() => setActiveTab('mentor')}
         >
-          Mentor
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <polyline points="16 11 18 13 22 9" />
+          </svg>
+          Mentor Panel
         </button>
       </div>
 
