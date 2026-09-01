@@ -60,10 +60,15 @@ a {
   border: var(--nb-border);
   border-radius: var(--nb-radius);
   box-shadow: var(--nb-shadow);
-  transition: all 0.15s ease;
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.15s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .nb-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--nb-black);
+}
+
+.nb-card:active {
   transform: translate(2px, 2px);
   box-shadow: var(--nb-shadow-hover);
 }
@@ -78,7 +83,8 @@ a {
 .nb-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 8px;
   padding: 10px 20px;
   font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 13px;
@@ -86,18 +92,19 @@ a {
   border: var(--nb-border);
   border-radius: var(--nb-radius);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.12s cubic-bezier(0.2, 0, 0, 1);
   box-shadow: var(--nb-shadow);
+  user-select: none;
 }
 
 .nb-btn:hover {
-  transform: translate(2px, 2px);
-  box-shadow: var(--nb-shadow-hover);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--nb-black);
 }
 
 .nb-btn:active {
-  transform: translate(4px, 4px);
-  box-shadow: none;
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0px var(--nb-black);
 }
 
 .nb-btn:disabled {
