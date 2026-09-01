@@ -113,7 +113,7 @@ function VerifyContent() {
                 >
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-5" style={{ borderBottom: '2px solid var(--nb-black)' }}>
                         <div>
-                            <div className="flex items-center gap-2 mb-1.5">
+                            <div className="flex flex-wrap items-center gap-2 mb-2">
                                 <span className="nb-badge" style={{ background: 'var(--nb-input-bg)' }}>ID #{verifiedId}</span>
                                 <span
                                     className="nb-badge"
@@ -122,19 +122,19 @@ function VerifyContent() {
                                         textTransform: 'uppercase',
                                     }}
                                 >
-                                    {result.approved ? 'Verified by Organization' : 'Pending Approval'}
+                                    {result.approved ? '✓ Verified on Polygon' : '⏳ Pending Mentor Approval'}
                                 </span>
                             </div>
 
-                            <h3 className="text-2xl font-bold tracking-tight">{result.title}</h3>
+                            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight">{result.title}</h3>
 
                             {result.approved && mentorDomainStr && (
-                                <div className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-green-800 bg-green-100 px-2.5 py-1 border border-green-400 rounded">
+                                <div className="mt-2.5 inline-flex items-center gap-1.5 text-xs font-bold text-black px-3 py-1.5" style={{ background: 'var(--nb-green)', border: '2px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                                         <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
                                         <path d="m9 12 2 2 4-4" />
                                     </svg>
-                                    Endorsed by {mentorDomainStr} Mentor
+                                    Official Endorsement by {mentorDomainStr} Mentor
                                 </div>
                             )}
                         </div>
@@ -148,7 +148,7 @@ function VerifyContent() {
                                     fgColor="#1A1A1A"
                                     level="M"
                                 />
-                                <span className="text-[10px] font-bold uppercase tracking-wider block mt-1">Scan to Verify</span>
+                                <span className="text-[10px] font-bold uppercase tracking-wider block mt-1">Scan for Proof</span>
                             </div>
                         )}
                     </div>
