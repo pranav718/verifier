@@ -62,110 +62,158 @@ export default function ProfilePage() {
 
     return (
         <main className="w-full max-w-[860px] mx-auto">
-            <div className="absolute inset-0 z-[-2] min-h-[100vh] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
             <Header />
 
-            <section className="relative mb-9 py-10 pb-10 border-b border-white/5 animate-[fadeInUp_0.8s_ease] before:absolute before:right-0 before:top-5 before:h-[200px] before:w-[200px] before:rounded-full before:bg-[radial-gradient(circle,rgba(255,255,255,0.04)_0%,transparent_70%)] before:pointer-events-none before:animate-[float_8s_ease-in-out_infinite] after:absolute after:-left-7 after:bottom-2.5 after:h-[120px] after:w-[120px] after:rounded-full after:bg-[radial-gradient(circle,rgba(255,255,255,0.03)_0%,transparent_70%)] after:pointer-events-none after:animate-[float_6s_ease-in-out_infinite_1s]">
-                <h1 className="mb-4 font-outfit text-4xl font-black leading-tight tracking-[-2px] text-transparent bg-clip-text bg-[linear-gradient(135deg,#ffffff_0%,#d4d4d8_25%,#ffffff_50%,#a1a1aa_75%,#ffffff_100%)] bg-[length:300%_auto] animate-[gradient-shift_6s_ease_infinite] sm:text-[44px]">Blockchain Resume</h1>
-                <p className="max-w-[600px] text-[15px] leading-[1.7] text-zinc-500 animate-[fadeInUp_0.8s_ease_0.2s_both]">
-                    Every entry below is verified on-chain. These records are permanent,
-                    tamper-proof, and independently verifiable by anyone.
+            {/* ── Profile Hero ── */}
+            <section className="relative mb-10 py-10 pb-10" style={{ borderBottom: '3px solid var(--nb-black)', animation: 'fadeInUp 0.6s ease' }}>
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                    <span className="nb-badge" style={{ background: 'var(--nb-yellow)' }}>On-Chain Portfolio</span>
+                    <span className="nb-badge" style={{ background: 'var(--nb-green)' }}>Polygon Provenance</span>
+                </div>
+
+                <h1 className="mb-4 text-4xl sm:text-5xl font-bold leading-tight tracking-[-2px]">
+                    Blockchain Resume
+                </h1>
+                <p className="max-w-[580px] text-[15px] leading-[1.7]" style={{ color: '#666', animation: 'fadeInUp 0.6s ease 0.15s both' }}>
+                    Every credential below is immutable and sealed onto the blockchain. Verified by corporate mentors, auditable by anyone worldwide.
                 </p>
             </section>
 
-            <div className="mt-[-16px] mb-8 overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-md">
-                <div className="flex flex-col gap-5">
-                    <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-5">
-                        <span className="font-mono text-sm tracking-[0.2px]">{address}</span>
+            {/* ── Profile Identity Card ── */}
+            <div className="nb-card p-6 sm:p-8 mb-8" style={{ animation: 'fadeInUp 0.6s ease 0.2s both' }}>
+                <div className="flex flex-col gap-6">
+                    <div className="flex flex-wrap items-center justify-between gap-4 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+                        <div>
+                            <span className="text-xs font-bold uppercase tracking-wider text-zinc-600 block mb-1">Student Wallet Address</span>
+                            <span className="font-mono text-sm sm:text-base font-bold break-all">{address}</span>
+                        </div>
                         <a
                             href={polygonscanAddressUrl(address)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="relative inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-transparent px-3.5 py-[7px] text-xs font-bold tracking-[-0.1px] text-zinc-400 backdrop-blur-sm transition-all duration-300 hover:-translate-y-px hover:border-white/25 hover:bg-white/5 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.03)]"
+                            className="nb-btn nb-btn-outline"
+                            style={{ padding: '6px 14px', fontSize: '12px' }}
                         >
-                            View on Polygonscan
+                            View on Polygonscan ↗
                         </a>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-4 rounded-xl border border-white/5 bg-black/40 p-4">
-                        <div className="flex flex-col items-center justify-center text-center">
-                            <span className="mb-1 font-outfit text-2xl font-black text-white">{submissions.length}</span>
-                            <span className="text-[10px] font-semibold uppercase tracking-[0.5px] text-zinc-500">Submissions</span>
+                    {/* ── Stats Grid ── */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div className="p-5 text-center" style={{ background: 'var(--nb-yellow)', border: 'var(--nb-border)', borderRadius: 'var(--nb-radius)', boxShadow: 'var(--nb-shadow-sm)' }}>
+                            <span className="font-bold text-3xl block leading-none mb-1">{submissions.length}</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-black">Total Submissions</span>
                         </div>
-                        <div className="flex flex-col items-center justify-center text-center">
-                            <span className="mb-1 font-outfit text-2xl font-black text-white">{approvedCount}</span>
-                            <span className="text-[10px] font-semibold uppercase tracking-[0.5px] text-zinc-500">Verified</span>
+                        <div className="p-5 text-center" style={{ background: 'var(--nb-green)', border: 'var(--nb-border)', borderRadius: 'var(--nb-radius)', boxShadow: 'var(--nb-shadow-sm)' }}>
+                            <span className="font-bold text-3xl block leading-none mb-1">{approvedCount}</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-black">Verified Credentials</span>
                         </div>
-                        <div className="flex flex-col items-center justify-center text-center">
-                            <span className="mb-1 font-outfit text-2xl font-black text-white">{uniqueDomains.length}</span>
-                            <span className="text-[10px] font-semibold uppercase tracking-[0.5px] text-zinc-500">Organizations</span>
+                        <div className="p-5 text-center" style={{ background: 'var(--nb-blue)', border: 'var(--nb-border)', borderRadius: 'var(--nb-radius)', boxShadow: 'var(--nb-shadow-sm)' }}>
+                            <span className="font-bold text-3xl block leading-none mb-1">{uniqueDomains.length}</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-black">Endorsing Companies</span>
                         </div>
                     </div>
 
                     {uniqueDomains.length > 0 && (
-                        <div className="flex flex-wrap gap-2">
-                            {uniqueDomains.map(d => (
-                                <span key={d} className="inline-flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1.5 text-xs font-semibold text-green-500">
-                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
-                                        <path d="m9 12 2 2 4-4" />
-                                    </svg>
-                                    {d}
-                                </span>
-                            ))}
+                        <div className="pt-2">
+                            <span className="text-xs font-bold uppercase tracking-wider text-zinc-600 block mb-2">Verified Affiliations</span>
+                            <div className="flex flex-wrap gap-2">
+                                {uniqueDomains.map(d => (
+                                    <span key={d} className="nb-badge" style={{ background: 'var(--nb-green)', padding: '6px 12px' }}>
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                                            <path d="m9 12 2 2 4-4" />
+                                        </svg>
+                                        Verified by {d}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
                     )}
                 </div>
             </div>
 
-            {loading && <p className="text-sm leading-[1.7] text-zinc-600" style={{ marginTop: 24 }}>Loading on-chain data...</p>}
-            {error && <div className="rounded-lg border border-red-500/10 bg-white/5 p-4 text-[13px] font-medium leading-[1.6] text-red-500 backdrop-blur-md animate-[fadeInUp_0.4s_ease]" style={{ marginTop: 24 }}>{error}</div>}
+            {loading && <p className="text-sm font-bold text-center py-8">Loading blockchain profile records...</p>}
+            {error && <div className="nb-alert-error my-4">{error}</div>}
 
             {!loading && submissions.length === 0 && (
-                <p className="text-sm leading-[1.7] text-zinc-600" style={{ marginTop: 24 }}>No submissions found for this address.</p>
+                <div className="nb-card p-8 text-center my-4">
+                    <p className="text-sm text-zinc-600 font-bold">No on-chain submissions found for this wallet address.</p>
+                </div>
             )}
 
-            <div className="mt-8 flex flex-col gap-4">
+            <div className="flex flex-col gap-5 mt-8 mb-12">
                 {submissions.map(sub => {
-                    const statusConfig = sub.approved
-                        ? '!border-green-500/20 hover:!border-green-500/35 hover:!shadow-[0_12px_40px_rgba(0,0,0,0.4),_0_0_30px_rgba(34,197,94,0.05)] text-green-500'
-                        : '!border-yellow-400/15 hover:!border-yellow-400/30 hover:!shadow-[0_12px_40px_rgba(0,0,0,0.4),_0_0_30px_rgba(250,204,21,0.03)] text-yellow-400';
-                        
                     return (
-                        <div key={sub.id} className={`relative overflow-hidden rounded-[14px] border border-white/5 bg-white/5 p-5 backdrop-blur-md transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] animate-[fadeInUp_0.5s_ease_both] before:absolute before:inset-0 before:h-px before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent)] before:opacity-0 before:transition-opacity before:duration-300 hover:-translate-y-0.5 hover:border-white/10 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4),_0_0_30px_rgba(255,255,255,0.02)] hover:before:opacity-1 ${statusConfig}`}>
-                            <div className="flex items-center justify-between">
-                                <div style={{ flex: 1 }}>
-                                    <div className="font-outfit text-[15px] font-extrabold tracking-[-0.2px] text-white">{sub.title}</div>
+                        <div
+                            key={sub.id}
+                            className="nb-card p-6 sm:p-7"
+                            style={{
+                                animation: 'fadeInUp 0.4s ease both',
+                                background: sub.approved ? '#FAFFF9' : '#FFFDF5',
+                            }}
+                        >
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+                                <div className="flex-1">
+                                    <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                                        <span className="nb-badge" style={{ background: 'var(--nb-input-bg)' }}>Record #{sub.id}</span>
+                                        <span
+                                            className="nb-badge"
+                                            style={{
+                                                background: sub.approved ? 'var(--nb-green)' : 'var(--nb-pink)',
+                                                textTransform: 'uppercase',
+                                            }}
+                                        >
+                                            {sub.approved ? '✓ Verified on Chain' : '⏳ Pending Approval'}
+                                        </span>
+                                    </div>
+
+                                    <h3 className="text-xl font-bold tracking-tight">{sub.title}</h3>
+
                                     {sub.approved && sub.mentorDomainStr && (
-                                        <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1.5 text-xs font-semibold text-green-500">
-                                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <div className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-black px-2.5 py-1" style={{ background: 'var(--nb-green)', border: '2px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                                                 <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
                                                 <path d="m9 12 2 2 4-4" />
                                             </svg>
-                                            Verified by {sub.mentorDomainStr}
+                                            Verified by {sub.mentorDomainStr} Mentor
                                         </div>
                                     )}
-                                    <div className={`mt-1.5 text-xs font-bold tracking-[0.2px] ${sub.approved ? 'text-green-500' : 'text-yellow-400'}`}>
-                                        {sub.approved ? 'Approved' : 'Pending'}
-                                    </div>
                                 </div>
+
                                 {sub.approved && (
-                                    <div className="flex flex-col items-center gap-2 rounded-[14px] border border-white/10 bg-black/40 !p-2 backdrop-blur-md">
-                                        <QRCodeSVG value={verifyPageUrl(sub.id)} size={60} bgColor="transparent" fgColor="#ffffff" level="M" />
+                                    <div className="p-2 text-center" style={{ background: '#FFF', border: 'var(--nb-border)', borderRadius: 'var(--nb-radius)', boxShadow: 'var(--nb-shadow-sm)' }}>
+                                        <QRCodeSVG value={verifyPageUrl(sub.id)} size={64} bgColor="#ffffff" fgColor="#1A1A1A" level="M" />
+                                        <span className="text-[9px] font-bold uppercase tracking-wider block mt-0.5">Scan Proof</span>
                                     </div>
                                 )}
                             </div>
 
-                            <div className="mt-3 flex flex-col gap-1.5 border-t border-white/5 pt-3 text-xs text-zinc-500">
-                                <div>
-                                    CID:{' '}
-                                    <a href={ipfsGatewayUrl(sub.cid)} target="_blank" rel="noopener noreferrer" className="font-mono text-[11px] tracking-[0.2px] text-zinc-400 underline decoration-white/10 underline-offset-2 transition-colors duration-300 hover:text-white hover:decoration-white/30">
-                                        {sub.cid.slice(0, 20)}...
+                            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                                <div className="p-2.5" style={{ background: 'var(--nb-input-bg)', border: '1px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+                                    <span className="font-bold uppercase tracking-wider text-zinc-600 block mb-0.5">IPFS Artifact</span>
+                                    <a href={ipfsGatewayUrl(sub.cid)} target="_blank" rel="noopener noreferrer" className="font-mono font-bold underline hover:bg-[var(--nb-yellow)]">
+                                        {sub.cid.slice(0, 16)}...{sub.cid.slice(-6)} ↗
                                     </a>
                                 </div>
-                                <div>Submitted: {new Date(sub.submittedAt * 1000).toLocaleString()}</div>
+
+                                <div className="p-2.5" style={{ background: 'var(--nb-input-bg)', border: '1px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+                                    <span className="font-bold uppercase tracking-wider text-zinc-600 block mb-0.5">Submission Date</span>
+                                    <span>{new Date(sub.submittedAt * 1000).toLocaleString()}</span>
+                                </div>
+
+                                {sub.mentor !== '0x0000000000000000000000000000000000000000' && (
+                                    <div className="p-2.5" style={{ background: 'var(--nb-input-bg)', border: '1px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+                                        <span className="font-bold uppercase tracking-wider text-zinc-600 block mb-0.5">Approved By</span>
+                                        <span className="font-mono font-bold">{sub.mentor.slice(0, 6)}...{sub.mentor.slice(-4)}</span>
+                                    </div>
+                                )}
+
                                 {sub.approvedAt > 0 && (
-                                    <div>Approved: {new Date(sub.approvedAt * 1000).toLocaleString()}</div>
+                                    <div className="p-2.5" style={{ background: 'var(--nb-input-bg)', border: '1px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+                                        <span className="font-bold uppercase tracking-wider text-zinc-600 block mb-0.5">Approval Date</span>
+                                        <span>{new Date(sub.approvedAt * 1000).toLocaleString()}</span>
+                                    </div>
                                 )}
                             </div>
                         </div>
