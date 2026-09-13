@@ -81,16 +81,16 @@ export default function VerificationForm() {
   };
 
   return (
-    <section className="mt-2" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
-      <div className="nb-card p-6 sm:p-8 mb-8">
-        <div className="flex items-center justify-between mb-6 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
-          <h2 className="text-xl font-bold tracking-tight">Submit Work Credential</h2>
-          <span className="nb-badge" style={{ background: 'var(--nb-yellow)' }}>IPFS + Polygon</span>
+    <section className="mt-4" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
+      <div className="nb-card p-7 sm:p-9 mb-10">
+        <div className="flex items-center justify-between mb-8 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight">Submit Work Credential</h2>
+          <span className="nb-badge" style={{ background: 'var(--nb-yellow)', padding: '5px 12px' }}>IPFS + Polygon</span>
         </div>
 
         {!account && (
-          <div className="nb-alert-info mb-6 flex items-center gap-2">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <div className="nb-alert-info mb-8 p-4 sm:p-5 flex items-start sm:items-center gap-3 text-sm leading-relaxed">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5 sm:mt-0">
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="16" x2="12" y2="12" />
               <line x1="12" y1="8" x2="12.01" y2="8" />
@@ -99,11 +99,12 @@ export default function VerificationForm() {
           </div>
         )}
 
-        <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-          <label className="flex flex-col text-xs font-bold uppercase tracking-wider text-zinc-700">
+        <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+          <label className="flex flex-col gap-2.5 text-xs font-bold uppercase tracking-wider text-zinc-700">
             Project / Task Title
             <input
-              className="nb-input mt-2"
+              className="nb-input"
+              style={{ padding: '14px 16px' }}
               value={title}
               onChange={e => setTitle(e.target.value)}
               placeholder="e.g. Distributed Consensus Engine in Go"
@@ -111,10 +112,11 @@ export default function VerificationForm() {
             />
           </label>
 
-          <label className="flex flex-col text-xs font-bold uppercase tracking-wider text-zinc-700">
+          <label className="flex flex-col gap-2.5 text-xs font-bold uppercase tracking-wider text-zinc-700">
             Proof Artifact (PDF, Image, Zip — Pinned to IPFS)
             <input
-              className="nb-input mt-2 file:mr-4 file:py-1 file:px-3 file:rounded file:border-2 file:border-black file:text-xs file:font-bold file:bg-[var(--nb-yellow)] file:cursor-pointer"
+              className="nb-input file:mr-4 file:py-1.5 file:px-3.5 file:rounded file:border-2 file:border-black file:text-xs file:font-bold file:bg-[var(--nb-yellow)] file:cursor-pointer"
+              style={{ padding: '12px 14px' }}
               id="file-input"
               type="file"
               onChange={e => setFile(e.target.files?.[0] || null)}
@@ -123,7 +125,7 @@ export default function VerificationForm() {
           </label>
 
           {error && (
-            <div className="nb-alert-error flex items-center gap-2">
+            <div className="nb-alert-error p-4 flex items-center gap-2.5">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
                 <line x1="12" y1="8" x2="12" y2="12" />
@@ -135,13 +137,14 @@ export default function VerificationForm() {
 
           {bcStep >= 0 && <BlockchainSteps currentStep={bcStep} />}
 
-          <div className="mt-2 flex flex-wrap gap-3">
+          <div className="mt-3 flex flex-wrap gap-4 pt-1">
             <button
               className="nb-btn nb-btn-primary"
+              style={{ padding: '12px 24px', fontSize: '14px' }}
               type="submit"
               disabled={loading || !account}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="17 8 12 3 7 8" />
                 <line x1="12" y1="3" x2="12" y2="15" />
@@ -151,6 +154,7 @@ export default function VerificationForm() {
 
             <button
               className="nb-btn nb-btn-outline"
+              style={{ padding: '12px 20px', fontSize: '14px' }}
               type="button"
               onClick={() => { setTitle(''); setFile(null); setError(null); }}
               disabled={loading}
@@ -161,19 +165,19 @@ export default function VerificationForm() {
         </form>
       </div>
 
-      <div className="nb-card p-6 sm:p-8">
-        <div className="flex items-center justify-between mb-4 pb-3" style={{ borderBottom: '2px solid var(--nb-black)' }}>
-          <h3 className="text-lg font-bold">Your Active Submissions</h3>
-          <span className="nb-badge" style={{ background: 'var(--nb-input-bg)' }}>{submissions.length} Total</span>
+      <div className="nb-card p-7 sm:p-9 mb-10">
+        <div className="flex items-center justify-between mb-6 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+          <h3 className="text-xl font-bold tracking-tight">Your Active Submissions</h3>
+          <span className="nb-badge" style={{ background: 'var(--nb-input-bg)', padding: '5px 12px' }}>{submissions.length} Total</span>
         </div>
 
         {submissions.length === 0 && (
-          <p className="text-sm leading-relaxed text-zinc-600 py-4 text-center">
+          <p className="text-sm leading-relaxed text-zinc-600 py-6 text-center">
             No submissions in this session yet. Upload a proof document and write to chain above.
           </p>
         )}
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5">
           {submissions.map(s => (
             <SubmissionCard key={s.id} submission={s} />
           ))}
