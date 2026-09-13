@@ -84,16 +84,16 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="relative mb-8 mt-12 flex gap-3" style={{ borderBottom: '3px solid var(--nb-black)', paddingBottom: '0px', animation: 'fadeInUp 0.6s ease 0.2s both' }}>
+      <div className="relative mb-10 mt-16 flex gap-3" style={{ borderBottom: '3px solid var(--nb-black)', paddingBottom: '0px', animation: 'fadeInUp 0.6s ease 0.2s both' }}>
         <button
-          className={`flex items-center justify-center gap-2 cursor-pointer py-3.5 px-6 text-sm font-bold tracking-[-0.2px] transition-all`}
+          className={`flex items-center justify-center gap-2.5 cursor-pointer py-4 px-7 text-sm font-bold tracking-tight transition-all`}
           style={{
             background: activeTab === 'student' ? 'var(--nb-yellow)' : 'var(--nb-card)',
             borderTop: '3px solid var(--nb-black)',
             borderLeft: '3px solid var(--nb-black)',
             borderRight: '3px solid var(--nb-black)',
             borderBottom: activeTab === 'student' ? '3px solid var(--nb-yellow)' : '3px solid var(--nb-black)',
-            borderRadius: '8px 8px 0 0',
+            borderRadius: '10px 10px 0 0',
             marginBottom: '-3px',
             boxShadow: activeTab === 'student' ? 'none' : 'inset 0 -2px 0 var(--nb-black)',
           }}
@@ -107,14 +107,14 @@ export default function Home() {
         </button>
 
         <button
-          className={`flex items-center justify-center gap-2 cursor-pointer py-3.5 px-6 text-sm font-bold tracking-[-0.2px] transition-all`}
+          className={`flex items-center justify-center gap-2.5 cursor-pointer py-4 px-7 text-sm font-bold tracking-tight transition-all`}
           style={{
             background: activeTab === 'mentor' ? 'var(--nb-yellow)' : 'var(--nb-card)',
             borderTop: '3px solid var(--nb-black)',
             borderLeft: '3px solid var(--nb-black)',
             borderRight: '3px solid var(--nb-black)',
             borderBottom: activeTab === 'mentor' ? '3px solid var(--nb-yellow)' : '3px solid var(--nb-black)',
-            borderRadius: '8px 8px 0 0',
+            borderRadius: '10px 10px 0 0',
             marginBottom: '-3px',
             boxShadow: activeTab === 'mentor' ? 'none' : 'inset 0 -2px 0 var(--nb-black)',
           }}
@@ -129,7 +129,9 @@ export default function Home() {
         </button>
       </div>
 
-      {activeTab === 'student' ? <VerificationForm /> : <MentorPanel />}
+      <div className="pb-16">
+        {activeTab === 'student' ? <VerificationForm /> : <MentorPanel />}
+      </div>
     </main>
   );
 }
