@@ -12,12 +12,13 @@ export default function WalletButton() {
 
     if (account) {
         return (
-            <div className="flex flex-wrap items-center gap-2" style={{ animation: 'slideIn 0.4s ease' }}>
+            <div className="flex flex-wrap items-center gap-2.5" style={{ animation: 'slideIn 0.4s ease' }}>
                 <span
                     className="nb-badge"
                     style={{
                         background: isAmoy ? 'var(--nb-green)' : 'var(--nb-red)',
-                        fontSize: '10px',
+                        fontSize: '11px',
+                        padding: '5px 10px',
                         textTransform: 'uppercase',
                         letterSpacing: '0.5px',
                     }}
@@ -27,13 +28,13 @@ export default function WalletButton() {
                 </span>
                 <span
                     className="nb-badge"
-                    style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', background: 'var(--nb-input-bg)' }}
+                    style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', padding: '5px 12px', background: 'var(--nb-input-bg)' }}
                 >
                     {truncateAddress(account)}
                 </span>
                 <button
                     className="nb-btn nb-btn-outline"
-                    style={{ padding: '5px 12px', fontSize: '11px', boxShadow: 'var(--nb-shadow-sm)' }}
+                    style={{ padding: '6px 14px', fontSize: '12px', boxShadow: 'var(--nb-shadow-sm)' }}
                     onClick={disconnect}
                 >
                     Disconnect
@@ -43,11 +44,11 @@ export default function WalletButton() {
     }
 
     return (
-        <div className="flex flex-wrap items-center gap-2" style={{ animation: 'slideIn 0.4s ease' }}>
-            {error && <span className="text-xs font-bold" style={{ color: 'var(--nb-red)' }}>{error}</span>}
+        <div className="flex flex-wrap items-center gap-2.5" style={{ animation: 'slideIn 0.4s ease' }}>
+            {error && <span className="text-xs font-bold px-2 py-1" style={{ color: 'var(--nb-red)' }}>{error}</span>}
             <button
                 className="nb-btn nb-btn-primary"
-                style={{ padding: '6px 14px', fontSize: '12px' }}
+                style={{ padding: '8px 18px', fontSize: '13px' }}
                 onClick={connect}
                 disabled={isConnecting}
             >

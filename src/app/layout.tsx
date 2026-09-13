@@ -19,7 +19,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen antialiased overflow-x-hidden">
         <WalletProvider>
-          <div className="relative flex justify-center p-4 sm:p-6 min-h-screen">
+          <div className="relative flex justify-center px-4 sm:px-8 py-6 sm:py-8 min-h-screen">
             {children}
           </div>
         </WalletProvider>
