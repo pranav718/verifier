@@ -151,7 +151,21 @@ export default function MentorPanel() {
             setSuccessMsg(`Approved! Tx: ${txHash.slice(0, 16)}...`);
             await fetchSubmissions();
         } catch (err: unknown) {
-            setError(err instanceof Error ? err.message : 'Approval failed');
+            let message = 'Approval failed';
+            if (err instanceof Error) {
+                if (err.message.includes('gas required exceeds allowance') || err.message.includes('insufficient funds')) {
+                    message = 'Insufficient POL in wallet to pay for gas. Please add testnet POL to your account.';
+                } else if (err.message.includes('user rejected action') || err.message.includes('ACTION_REJECTED')) {
+                    message = 'Transaction rejected in MetaMask.';
+                } else if (err.message.includes('Cannot self-approve')) {
+                    message = 'Cannot approve your own submission.';
+                } else if (err.message.includes('Not a verified mentor')) {
+                    message = 'Wallet is not registered as a verified mentor.';
+                } else {
+                    message = err.message;
+                }
+            }
+            setError(message);
         } finally {
             setApprovingId(null);
         }
@@ -159,10 +173,10 @@ export default function MentorPanel() {
 
     if (!account) {
         return (
-            <section className="mt-4" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
-                <div className="nb-card p-7 sm:p-9 mb-10">
-                    <h2 className="text-xl sm:text-2xl font-bold mb-5 tracking-tight">Mentor Access Gateway</h2>
-                    <div className="nb-alert-info p-4 sm:p-5 flex items-start sm:items-center gap-3 text-sm leading-relaxed">
+            <section style={{ marginTop: '8px', animation: 'fadeInUp 0.6s ease 0.3s both' }}>
+                <div className="nb-card" style={{ padding: '36px 40px', marginBottom: '48px' }}>
+                    <h2 className="text-xl sm:text-2xl font-bold tracking-tight" style={{ marginBottom: '24px' }}>Mentor Access Gateway</h2>
+                    <div className="nb-alert-info flex items-start sm:items-center text-sm leading-relaxed" style={{ padding: '16px 20px', gap: '12px' }}>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5 sm:mt-0">
                             <circle cx="12" cy="12" r="10" />
                             <line x1="12" y1="16" x2="12" y2="12" />
@@ -177,9 +191,9 @@ export default function MentorPanel() {
 
     if (checkingVerification) {
         return (
-            <section className="mt-4" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
-                <div className="nb-card p-8 sm:p-12 mb-10 text-center">
-                    <h2 className="text-xl sm:text-2xl font-bold mb-4 tracking-tight">Checking Mentor Credentials</h2>
+            <section style={{ marginTop: '8px', animation: 'fadeInUp 0.6s ease 0.3s both' }}>
+                <div className="nb-card text-center" style={{ padding: '36px 48px', marginBottom: '48px' }}>
+                    <h2 className="text-xl sm:text-2xl font-bold tracking-tight" style={{ marginBottom: '16px' }}>Checking Mentor Credentials</h2>
                     <p className="text-sm font-bold text-zinc-600 animate-pulse">Querying verified mentor status on Polygon blockchain...</p>
                 </div>
             </section>
@@ -188,14 +202,14 @@ export default function MentorPanel() {
 
     if (!isVerified && !showRegister) {
         return (
-            <section className="mt-4" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
-                <div className="nb-card p-7 sm:p-9 mb-10">
-                    <div className="flex items-center justify-between mb-6 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+            <section style={{ marginTop: '8px', animation: 'fadeInUp 0.6s ease 0.3s both' }}>
+                <div className="nb-card" style={{ padding: '36px 40px', marginBottom: '48px' }}>
+                    <div className="flex items-center justify-between" style={{ marginBottom: '28px', paddingBottom: '20px', borderBottom: '2px solid var(--nb-black)' }}>
                         <h2 className="text-xl sm:text-2xl font-bold tracking-tight">Corporate Affiliation Required</h2>
                         <span className="nb-badge" style={{ background: 'var(--nb-yellow)', padding: '5px 12px' }}>Unverified</span>
                     </div>
 
-                    <p className="text-sm sm:text-[15px] leading-relaxed text-zinc-700 mb-8">
+                    <p className="text-sm sm:text-[15px] leading-relaxed text-zinc-700" style={{ marginBottom: '32px' }}>
                         To approve student work submissions, you must prove your organizational identity through corporate email validation. This prevents unauthorized approvals and preserves on-chain integrity.
                     </p>
 
@@ -212,16 +226,16 @@ export default function MentorPanel() {
 
     if (!isVerified && showRegister) {
         return (
-            <section className="mt-4" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
-                <div className="nb-card p-7 sm:p-9 mb-10">
-                    <div className="flex items-center justify-between mb-8 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+            <section style={{ marginTop: '8px', animation: 'fadeInUp 0.6s ease 0.3s both' }}>
+                <div className="nb-card" style={{ padding: '36px 40px', marginBottom: '48px' }}>
+                    <div className="flex items-center justify-between" style={{ marginBottom: '32px', paddingBottom: '20px', borderBottom: '2px solid var(--nb-black)' }}>
                         <h2 className="text-xl sm:text-2xl font-bold tracking-tight">Corporate Email Verification</h2>
                         <span className="nb-badge" style={{ background: 'var(--nb-blue)', padding: '5px 12px' }}>Step {!otpSent ? '1 of 2' : '2 of 2'}</span>
                     </div>
 
                     {!otpSent ? (
-                        <div className="flex flex-col gap-6">
-                            <label className="flex flex-col gap-2.5 text-xs font-bold uppercase tracking-wider text-zinc-700">
+                        <div className="flex flex-col" style={{ gap: '24px' }}>
+                            <label className="flex flex-col text-xs font-bold uppercase tracking-wider text-zinc-700" style={{ gap: '10px' }}>
                                 Corporate Email Address (@google.com, @microsoft.com, etc.)
                                 <input
                                     className="nb-input"
@@ -240,7 +254,7 @@ export default function MentorPanel() {
 
                             {registerError && <div className="nb-alert-error p-4">{registerError}</div>}
 
-                            <div className="flex flex-wrap gap-4 mt-2">
+                            <div className="flex flex-wrap" style={{ gap: '16px', marginTop: '8px' }}>
                                 <button className="nb-btn nb-btn-primary" style={{ padding: '12px 24px', fontSize: '14px' }} onClick={handleSendOtp} disabled={registering}>
                                     {registering ? 'Sending Code...' : 'Send Verification OTP'}
                                 </button>
@@ -250,15 +264,15 @@ export default function MentorPanel() {
                             </div>
                         </div>
                     ) : (
-                        <div className="flex flex-col gap-6">
-                            <div className="nb-alert-success p-4 sm:p-5 flex items-center gap-2.5">
+                        <div className="flex flex-col" style={{ gap: '24px' }}>
+                            <div className="nb-alert-success flex items-center" style={{ padding: '16px 20px', gap: '10px' }}>
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                     <polyline points="20 6 9 17 4 12" />
                                 </svg>
                                 <span>One-time passcode sent to <span className="font-bold underline">{emailInput}</span></span>
                             </div>
 
-                            <label className="flex flex-col gap-2.5 text-xs font-bold uppercase tracking-wider text-zinc-700">
+                            <label className="flex flex-col text-xs font-bold uppercase tracking-wider text-zinc-700" style={{ gap: '10px' }}>
                                 Enter 6-Digit Verification Code
                                 <input
                                     className="nb-input font-mono text-lg tracking-widest text-center"
@@ -274,7 +288,7 @@ export default function MentorPanel() {
 
                             {registerError && <div className="nb-alert-error p-4">{registerError}</div>}
 
-                            <div className="flex flex-wrap gap-4 mt-2">
+                            <div className="flex flex-wrap" style={{ gap: '16px', marginTop: '8px' }}>
                                 <button className="nb-btn nb-btn-primary" style={{ padding: '12px 24px', fontSize: '14px' }} onClick={handleVerifyOtp} disabled={registering}>
                                     {registering ? 'Registering on Blockchain...' : 'Verify & Register on Chain'}
                                 </button>
@@ -290,9 +304,9 @@ export default function MentorPanel() {
     }
 
     return (
-        <section className="mt-4" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
-            <div className="nb-card p-7 sm:p-9 mb-10">
-                <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-5" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+        <section style={{ marginTop: '8px', animation: 'fadeInUp 0.6s ease 0.3s both' }}>
+            <div className="nb-card" style={{ padding: '36px 40px', marginBottom: '48px' }}>
+                <div className="flex flex-wrap items-center justify-between" style={{ gap: '16px', marginBottom: '32px', paddingBottom: '20px', borderBottom: '2px solid var(--nb-black)' }}>
                     <div>
                         <h2 className="text-xl sm:text-2xl font-bold tracking-tight">Mentor Governance Dashboard</h2>
                         <p className="text-xs sm:text-sm text-zinc-600 mt-1.5">Review student proof submissions and sign off on credentials.</p>
@@ -307,7 +321,7 @@ export default function MentorPanel() {
                     </div>
                 </div>
 
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap" style={{ gap: '16px' }}>
                     <button
                         className="nb-btn nb-btn-primary"
                         style={{ padding: '12px 24px', fontSize: '14px' }}
@@ -323,36 +337,36 @@ export default function MentorPanel() {
                     </button>
                 </div>
 
-                {error && <div className="nb-alert-error mt-5 p-4">{error}</div>}
-                {successMsg && <div className="nb-alert-success mt-5 p-4">{successMsg}</div>}
+                {error && <div className="nb-alert-error" style={{ marginTop: '20px', padding: '16px 20px' }}>{error}</div>}
+                {successMsg && <div className="nb-alert-success" style={{ marginTop: '20px', padding: '16px 20px' }}>{successMsg}</div>}
             </div>
 
-            <div className="nb-card p-7 sm:p-9 mb-10">
-                <div className="flex items-center justify-between mb-6 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+            <div className="nb-card" style={{ padding: '36px 40px', marginBottom: '48px' }}>
+                <div className="flex items-center justify-between" style={{ marginBottom: '28px', paddingBottom: '20px', borderBottom: '2px solid var(--nb-black)' }}>
                     <h3 className="text-xl font-bold tracking-tight">All On-Chain Records</h3>
                     <span className="nb-badge" style={{ background: 'var(--nb-input-bg)', padding: '5px 12px' }}>{submissions.length} Total</span>
                 </div>
 
                 {submissions.length === 0 && !loadingList && (
-                    <p className="text-sm leading-relaxed text-zinc-600 py-8 text-center">
+                    <p className="text-sm leading-relaxed text-zinc-600 text-center" style={{ padding: '32px 0' }}>
                         Click "Fetch All Submissions from Blockchain" above to load global student submissions.
                     </p>
                 )}
 
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col" style={{ gap: '20px' }}>
                     {submissions.map(sub => {
                         return (
                             <div
                                 key={sub.id}
-                                className="p-6"
                                 style={{
                                     background: sub.approved ? '#F8FFF9' : '#FFFDF5',
                                     border: 'var(--nb-border)',
                                     borderRadius: 'var(--nb-radius)',
                                     boxShadow: 'var(--nb-shadow-sm)',
+                                    padding: '24px 28px',
                                 }}
                             >
-                                <div className="flex flex-wrap items-center justify-between gap-4 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+                                <div className="flex flex-wrap items-center justify-between" style={{ gap: '16px', paddingBottom: '16px', borderBottom: '2px solid var(--nb-black)' }}>
                                     <div>
                                         <h4 className="text-base sm:text-lg font-bold tracking-tight">{sub.title}</h4>
                                         <div className="mt-1.5 text-xs text-zinc-600 flex items-center gap-2">
@@ -390,7 +404,7 @@ export default function MentorPanel() {
                                     </div>
                                 </div>
 
-                                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 text-xs" style={{ marginTop: '20px', gap: '12px' }}>
                                     <div className="p-3" style={{ background: 'var(--nb-input-bg)', border: '1px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
                                         <span className="font-bold text-zinc-500 block mb-1">IPFS Artifact</span>
                                         <a href={ipfsGatewayUrl(sub.cid)} target="_blank" rel="noopener noreferrer" className="font-mono font-bold underline hover:bg-[var(--nb-yellow)]">

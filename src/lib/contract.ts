@@ -27,13 +27,13 @@ export interface OnChainSubmission {
     approvedAt: number;
 }
 
-const GAS_OVERRIDES = {
-    maxPriorityFeePerGas: ethers.parseUnits('30', 'gwei'),
-    maxFeePerGas: ethers.parseUnits('50', 'gwei'),
+const BASE_FEE_OVERRIDES = {
+    maxPriorityFeePerGas: ethers.parseUnits('35', 'gwei'),
+    maxFeePerGas: ethers.parseUnits('80', 'gwei'),
 };
 
 export function getReadOnlyProvider() {
-    const rpc = process.env.NEXT_PUBLIC_AMOY_RPC || 'https://rpc-amoy.polygon.technology';
+    const rpc = process.env.NEXT_PUBLIC_AMOY_RPC || 'https://polygon-amoy.drpc.org';
     return new ethers.JsonRpcProvider(rpc);
 }
 
@@ -51,21 +51,21 @@ export function getReadOnlyContract(): Contract {
 
 export async function submitWork(title: string, cid: string): Promise<string> {
     const contract = await getSignedContract();
-    const tx = await contract.submitWork(title, cid, GAS_OVERRIDES);
+    const tx = await contract.submitWork(title, cid, { ...BASE_FEE_OVERRIDES, gasLimit: BigInt(350000) });
     const receipt = await tx.wait();
     return receipt.hash;
 }
 
 export async function approveWork(submissionId: number): Promise<string> {
     const contract = await getSignedContract();
-    const tx = await contract.approveWork(submissionId, GAS_OVERRIDES);
+    const tx = await contract.approveWork(submissionId, { ...BASE_FEE_OVERRIDES, gasLimit: BigInt(180000) });
     const receipt = await tx.wait();
     return receipt.hash;
 }
 
 export async function selfRegisterMentor(domain: string): Promise<string> {
     const contract = await getSignedContract();
-    const tx = await contract.selfRegisterMentor(domain, GAS_OVERRIDES);
+    const tx = await contract.selfRegisterMentor(domain, { ...BASE_FEE_OVERRIDES, gasLimit: BigInt(150000) });
     const receipt = await tx.wait();
     return receipt.hash;
 }

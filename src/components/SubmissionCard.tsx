@@ -20,12 +20,13 @@ export default function SubmissionCard({ submission }: { submission: Submission 
 
   return (
     <div
-      className="nb-card p-6 sm:p-7"
+      className="nb-card"
       style={{
         animation: 'fadeInUp 0.4s ease both',
+        padding: '28px 32px',
       }}
     >
-      <div className="flex flex-wrap items-center justify-between gap-4 pb-4 mb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+      <div className="flex flex-wrap items-center justify-between" style={{ gap: '16px', paddingBottom: '16px', marginBottom: '20px', borderBottom: '2px solid var(--nb-black)' }}>
         <div>
           <h4 className="text-base sm:text-lg font-bold tracking-tight">{submission.title}</h4>
           <span className="text-xs text-zinc-500 font-mono mt-0.5 block">ID: #{submission.id}</span>
@@ -50,9 +51,9 @@ export default function SubmissionCard({ submission }: { submission: Submission 
         </span>
       </div>
 
-      <div className="flex flex-col gap-3 text-xs sm:text-sm">
+      <div className="flex flex-col" style={{ gap: '12px', fontSize: '13px' }}>
         {submission.cid && (
-          <div className="flex flex-wrap items-center justify-between gap-2 p-3" style={{ background: 'var(--nb-input-bg)', border: '2px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+          <div className="flex flex-wrap items-center justify-between" style={{ gap: '8px', padding: '12px 14px', background: 'var(--nb-input-bg)', border: '2px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
             <span className="font-bold uppercase tracking-wider text-zinc-600">IPFS CID</span>
             <a
               href={ipfsGatewayUrl(submission.cid)}
@@ -66,7 +67,7 @@ export default function SubmissionCard({ submission }: { submission: Submission 
         )}
 
         {submission.txHash && (
-          <div className="flex flex-wrap items-center justify-between gap-2 p-3" style={{ background: 'var(--nb-input-bg)', border: '2px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+          <div className="flex flex-wrap items-center justify-between" style={{ gap: '8px', padding: '12px 14px', background: 'var(--nb-input-bg)', border: '2px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
             <span className="font-bold uppercase tracking-wider text-zinc-600">Creation Tx</span>
             <a
               href={polygonscanTxUrl(submission.txHash)}
@@ -80,7 +81,7 @@ export default function SubmissionCard({ submission }: { submission: Submission 
         )}
 
         {submission.approvalTxHash && (
-          <div className="flex flex-wrap items-center justify-between gap-2 p-3" style={{ background: 'var(--nb-input-bg)', border: '2px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
+          <div className="flex flex-wrap items-center justify-between" style={{ gap: '8px', padding: '12px 14px', background: 'var(--nb-input-bg)', border: '2px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
             <span className="font-bold uppercase tracking-wider text-zinc-600">Approval Tx</span>
             <a
               href={polygonscanTxUrl(submission.approvalTxHash)}
