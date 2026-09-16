@@ -61,31 +61,31 @@ export default function ProfilePage() {
     const uniqueDomains = [...new Set(submissions.filter(s => s.mentorDomainStr).map(s => s.mentorDomainStr))];
 
     return (
-        <main className="w-full max-w-[860px] mx-auto pb-16">
+        <main className="w-full max-w-[860px] mx-auto" style={{ paddingBottom: '64px', paddingLeft: '20px', paddingRight: '20px' }}>
             <Header />
 
-            <section className="relative mb-14 py-8 pb-12" style={{ borderBottom: '3px solid var(--nb-black)', animation: 'fadeInUp 0.6s ease' }}>
-                <div className="flex flex-wrap items-center gap-2.5 mb-4">
+            <section className="relative" style={{ borderBottom: '3px solid var(--nb-black)', animation: 'fadeInUp 0.6s ease', marginBottom: '48px', paddingTop: '40px', paddingBottom: '48px' }}>
+                <div className="flex flex-wrap items-center" style={{ gap: '10px', marginBottom: '20px' }}>
                     <span className="nb-badge" style={{ background: 'var(--nb-yellow)', padding: '5px 12px' }}>On-Chain Portfolio</span>
                     <span className="nb-badge" style={{ background: 'var(--nb-green)', padding: '5px 12px' }}>Polygon Provenance</span>
                 </div>
 
-                <h1 className="mb-5 text-4xl sm:text-5xl lg:text-[54px] font-bold leading-tight tracking-[-2px]">
+                <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-bold leading-tight tracking-[-2px]" style={{ marginBottom: '24px' }}>
                     Blockchain Resume
                 </h1>
-                <p className="max-w-[600px] text-base leading-[1.75]" style={{ color: '#555', animation: 'fadeInUp 0.6s ease 0.15s both' }}>
+                <p className="max-w-[600px] text-base leading-[1.75]" style={{ color: '#555', animation: 'fadeInUp 0.6s ease 0.15s both', marginTop: '4px' }}>
                     Every credential below is immutable and sealed onto the blockchain. Verified by corporate mentors, auditable by anyone worldwide.
                 </p>
             </section>
 
-            <div className="nb-card p-7 sm:p-9 mb-10" style={{ animation: 'fadeInUp 0.6s ease 0.2s both' }}>
-                <div className="flex flex-col gap-6">
-                    <div className="flex flex-wrap items-center justify-between gap-4 pb-5" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+            <div className="nb-card" style={{ padding: '36px 40px', marginBottom: '48px', animation: 'fadeInUp 0.6s ease 0.2s both' }}>
+                <div className="flex flex-col" style={{ gap: '28px' }}>
+                    <div className="flex flex-wrap items-center justify-between" style={{ gap: '16px', paddingBottom: '24px', borderBottom: '2px solid var(--nb-black)' }}>
                         <div>
                             <span className="text-xs font-bold uppercase tracking-wider text-zinc-600 block mb-1.5">Student Wallet Address</span>
                             <span className="font-mono text-sm sm:text-base font-bold break-all">{address}</span>
                         </div>
-                        <div className="flex flex-wrap gap-2.5">
+                        <div className="flex flex-wrap" style={{ gap: '10px' }}>
                             <button
                                 className="nb-btn nb-btn-outline"
                                 style={{ padding: '8px 16px', fontSize: '12px' }}
@@ -94,7 +94,12 @@ export default function ProfilePage() {
                                     alert('Profile URL copied to clipboard!');
                                 }}
                             >
-                                Share Profile 📋
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                                    <polyline points="16 6 12 2 8 6" />
+                                    <line x1="12" y1="2" x2="12" y2="15" />
+                                </svg>
+                                Share Profile
                             </button>
                             <a
                                 href={polygonscanAddressUrl(address)}
@@ -108,7 +113,7 @@ export default function ProfilePage() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-3" style={{ gap: '20px', marginTop: '8px' }}>
                         <div className="p-6 text-center" style={{ background: 'var(--nb-yellow)', border: 'var(--nb-border)', borderRadius: 'var(--nb-radius)', boxShadow: 'var(--nb-shadow-sm)' }}>
                             <span className="font-bold text-3xl sm:text-4xl block leading-none mb-2">{submissions.length}</span>
                             <span className="text-xs font-bold uppercase tracking-wider text-black">Total Submissions</span>
@@ -142,27 +147,28 @@ export default function ProfilePage() {
                 </div>
             </div>
 
-            {loading && <p className="text-sm font-bold text-center py-12">Loading blockchain profile records...</p>}
-            {error && <div className="nb-alert-error my-4 p-4">{error}</div>}
+            {loading && <p className="text-sm font-bold text-center" style={{ padding: '48px 0' }}>Loading blockchain profile records...</p>}
+            {error && <div className="nb-alert-error" style={{ margin: '24px 0', padding: '16px 20px' }}>{error}</div>}
 
             {!loading && submissions.length === 0 && (
-                <div className="nb-card p-10 text-center my-6">
+                <div className="nb-card text-center" style={{ padding: '40px', marginTop: '24px' }}>
                     <p className="text-sm sm:text-base text-zinc-600 font-bold">No on-chain submissions found for this wallet address.</p>
                 </div>
             )}
 
-            <div className="flex flex-col gap-6 mt-10 mb-12">
+            <div className="flex flex-col" style={{ gap: '24px', marginTop: '40px', marginBottom: '48px' }}>
                 {submissions.map(sub => {
                     return (
                         <div
                             key={sub.id}
-                            className="nb-card p-6 sm:p-8"
+                            className="nb-card"
                             style={{
                                 animation: 'fadeInUp 0.4s ease both',
                                 background: sub.approved ? '#FAFFF9' : '#FFFDF5',
+                                padding: '28px 36px',
                             }}
                         >
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between" style={{ gap: '16px', paddingBottom: '20px', borderBottom: '2px solid var(--nb-black)' }}>
                                 <div className="flex-1">
                                     <div className="flex flex-wrap items-center gap-2 mb-2">
                                         <span className="nb-badge" style={{ background: 'var(--nb-input-bg)', padding: '4px 10px' }}>Record #{sub.id}</span>
@@ -199,7 +205,7 @@ export default function ProfilePage() {
                                 )}
                             </div>
 
-                            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 text-xs sm:text-sm" style={{ marginTop: '20px', gap: '12px' }}>
                                 <div className="p-3" style={{ background: 'var(--nb-input-bg)', border: '1px solid var(--nb-black)', borderRadius: 'var(--nb-radius)' }}>
                                     <span className="font-bold uppercase tracking-wider text-zinc-600 block mb-1">IPFS Artifact</span>
                                     <a href={ipfsGatewayUrl(sub.cid)} target="_blank" rel="noopener noreferrer" className="font-mono font-bold underline hover:bg-[var(--nb-yellow)] px-1 py-0.5 rounded">
