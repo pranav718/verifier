@@ -81,15 +81,15 @@ export default function VerificationForm() {
   };
 
   return (
-    <section className="mt-4" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
-      <div className="nb-card p-7 sm:p-9 mb-10">
-        <div className="flex items-center justify-between mb-8 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+    <section style={{ marginTop: '8px', animation: 'fadeInUp 0.6s ease 0.3s both' }}>
+      <div className="nb-card" style={{ padding: '36px 40px', marginBottom: '48px' }}>
+        <div className="flex items-center justify-between" style={{ marginBottom: '32px', paddingBottom: '20px', borderBottom: '2px solid var(--nb-black)' }}>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight">Submit Work Credential</h2>
           <span className="nb-badge" style={{ background: 'var(--nb-yellow)', padding: '5px 12px' }}>IPFS + Polygon</span>
         </div>
 
         {!account && (
-          <div className="nb-alert-info mb-8 p-4 sm:p-5 flex items-start sm:items-center gap-3 text-sm leading-relaxed">
+          <div className="nb-alert-info flex items-start sm:items-center text-sm leading-relaxed" style={{ marginBottom: '28px', padding: '16px 20px', gap: '12px' }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5 sm:mt-0">
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="16" x2="12" y2="12" />
@@ -99,8 +99,8 @@ export default function VerificationForm() {
           </div>
         )}
 
-        <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
-          <label className="flex flex-col gap-2.5 text-xs font-bold uppercase tracking-wider text-zinc-700">
+        <form className="flex flex-col" style={{ gap: '28px' }} onSubmit={handleSubmit}>
+          <label className="flex flex-col text-xs font-bold uppercase tracking-wider text-zinc-700" style={{ gap: '10px' }}>
             Project / Task Title
             <input
               className="nb-input"
@@ -112,7 +112,7 @@ export default function VerificationForm() {
             />
           </label>
 
-          <label className="flex flex-col gap-2.5 text-xs font-bold uppercase tracking-wider text-zinc-700">
+          <label className="flex flex-col text-xs font-bold uppercase tracking-wider text-zinc-700" style={{ gap: '10px' }}>
             Proof Artifact (PDF, Image, Zip — Pinned to IPFS)
             <input
               className="nb-input file:mr-4 file:py-1.5 file:px-3.5 file:rounded file:border-2 file:border-black file:text-xs file:font-bold file:bg-[var(--nb-yellow)] file:cursor-pointer"
@@ -137,7 +137,7 @@ export default function VerificationForm() {
 
           {bcStep >= 0 && <BlockchainSteps currentStep={bcStep} />}
 
-          <div className="mt-3 flex flex-wrap gap-4 pt-1">
+          <div className="flex flex-wrap" style={{ marginTop: '16px', gap: '16px', paddingTop: '8px' }}>
             <button
               className="nb-btn nb-btn-primary"
               style={{ padding: '12px 24px', fontSize: '14px' }}
@@ -165,8 +165,8 @@ export default function VerificationForm() {
         </form>
       </div>
 
-      <div className="nb-card p-7 sm:p-9 mb-10">
-        <div className="flex items-center justify-between mb-6 pb-4" style={{ borderBottom: '2px solid var(--nb-black)' }}>
+      <div className="nb-card" style={{ padding: '36px 40px', marginBottom: '48px' }}>
+        <div className="flex items-center justify-between" style={{ marginBottom: '28px', paddingBottom: '20px', borderBottom: '2px solid var(--nb-black)' }}>
           <h3 className="text-xl font-bold tracking-tight">Your Active Submissions</h3>
           <span className="nb-badge" style={{ background: 'var(--nb-input-bg)', padding: '5px 12px' }}>{submissions.length} Total</span>
         </div>

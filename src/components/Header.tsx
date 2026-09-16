@@ -8,7 +8,7 @@ export default function Header() {
   const { account } = useWallet();
 
   return (
-    <header className="sticky top-0 z-[100] mb-12 flex flex-wrap items-center justify-between gap-4 py-5 px-1 backdrop-blur-sm" style={{ borderBottom: '3px solid var(--nb-black)', background: 'rgba(255, 253, 247, 0.95)' }}>
+    <header className="sticky top-0 z-[100] mb-6 flex flex-wrap items-center justify-between gap-4 py-6 px-2 backdrop-blur-sm" style={{ borderBottom: '3px solid var(--nb-black)', background: 'rgba(255, 253, 247, 0.95)' }}>
       <Link href="/" className="flex items-center gap-2 no-underline">
         <span className="text-2xl font-bold tracking-[-0.8px]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
           verifier<span style={{ color: 'var(--nb-yellow)' }}>.</span>

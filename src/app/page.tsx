@@ -11,19 +11,19 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>('student');
 
   return (
-    <main className="w-full max-w-[860px] mx-auto">
+    <main className="w-full max-w-[860px] mx-auto px-5 sm:px-8">
       <Header />
 
-      <section className="relative mb-14 py-8 pb-12" style={{ borderBottom: '3px solid var(--nb-black)', animation: 'fadeInUp 0.6s ease' }}>
-        <h1 className="mb-5 text-4xl sm:text-5xl lg:text-[54px] font-bold leading-tight tracking-[-2px]">
+      <section className="relative" style={{ borderBottom: '3px solid var(--nb-black)', animation: 'fadeInUp 0.6s ease', marginBottom: '48px', paddingTop: '40px', paddingBottom: '48px' }}>
+        <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-bold leading-tight tracking-[-2px]" style={{ marginBottom: '24px' }}>
           Blockchain&#8209;Based<br />Work Verification
         </h1>
-        <p className="max-w-[600px] text-base leading-[1.75]" style={{ color: '#555', animation: 'fadeInUp 0.6s ease 0.15s both' }}>
+        <p className="max-w-[600px] text-base leading-[1.75] mt-1" style={{ color: '#555', animation: 'fadeInUp 0.6s ease 0.15s both' }}>
           Students upload proof files to IPFS and submit CIDs to the smart contract.
           Mentors approve on&#8209;chain. Recruiters verify everything trustlessly.
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-3" style={{ animation: 'fadeInUp 0.6s ease 0.3s both' }}>
+        <div className="flex flex-wrap" style={{ marginTop: '32px', gap: '16px', animation: 'fadeInUp 0.6s ease 0.3s both' }}>
           <span className="nb-chip" style={{ background: 'var(--nb-yellow)' }}>
             <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--nb-black)', display: 'inline-block' }} />
             Polygon Amoy
@@ -39,7 +39,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 mb-14" style={{ animation: 'fadeInUp 0.6s ease 0.2s both' }}>
+      <div className="grid grid-cols-1 sm:grid-cols-3" style={{ gap: '24px', marginBottom: '56px', animation: 'fadeInUp 0.6s ease 0.2s both' }}>
         <div className="nb-card relative flex flex-col items-start gap-3.5 p-7">
           <div className="flex w-full items-center justify-between">
             <span className="flex h-12 w-12 items-center justify-center" style={{ border: 'var(--nb-border)', borderRadius: 'var(--nb-radius)', background: 'var(--nb-yellow)' }}>
@@ -84,7 +84,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="relative mb-10 mt-16 flex gap-3" style={{ borderBottom: '3px solid var(--nb-black)', paddingBottom: '0px', animation: 'fadeInUp 0.6s ease 0.2s both' }}>
+      <div className="relative flex" style={{ borderBottom: '3px solid var(--nb-black)', paddingBottom: '0px', marginBottom: '40px', marginTop: '0px', gap: '12px', animation: 'fadeInUp 0.6s ease 0.2s both' }}>
         <button
           className={`flex items-center justify-center gap-2.5 cursor-pointer py-4 px-7 text-sm font-bold tracking-tight transition-all`}
           style={{
@@ -129,7 +129,7 @@ export default function Home() {
         </button>
       </div>
 
-      <div className="pb-16">
+      <div className="pb-20">
         {activeTab === 'student' ? <VerificationForm /> : <MentorPanel />}
       </div>
     </main>
